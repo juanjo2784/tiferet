@@ -207,11 +207,11 @@ function DelMultimedia($p){
 $this->dbClose();
 }
 
-function UpMultimedia($nfile, $titulo, $descripcion, $categoria, $tipo, $direccion, $ntf){
+function UpMultimedia($categoria, $tipo, $nombre, $titulo, $descripcion, $dir, $idarchivo){
   $this->cnx();
   try{
-    $this->consulta = $this->conn->prepare("UPDATE articulos set categoria = :categoria, descripcion = :descripcion, dir = :dir, nombre = :nombre, tipo = :tipo, titulo = :titulo WHERE (idarchivo= :id)");
-    $this->consulta->execute(array(":titulo"=>$titulo, ":subtitulo"=>$subtitulo, ":autor"=>$autor, ":contenido"=>$contenido, ":tcr"=>$tcr, ":fecha"=>$fecha, "id"=>$p, ":nimg"=>$nimg));
+    $this->consulta = $this->conn->prepare("UPDATE articulos set categoria = :categoria, descripcion = :descripcion, dir = :dir, nombre = :nombre, tipo = :tipo, titulo = :titulo, dir = :dir WHERE (idarchivo= :idarchivo)");
+    $this->consulta->execute(array(":categoria"=>$categoria, ":tipo"=>$tipo, ":nombre"=>$nombre, ":titulo"=>$titulo, ":descripcion"=>$descripcion, ":dir"=>$dir, ":idarchivo"=>$idarchivo));
   } catch (Exception $e){
     echo "Error al actualizar";
   }

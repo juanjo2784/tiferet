@@ -1,9 +1,10 @@
 <?php
 include_once "apiMultimedia.php";
 $article = new Multimedia;
-$_SESSION['tipo']=(!isset($_POST['tipo']))?1:$_POST['tipo'];
-$_SESSION['contenido'] = (!isset($_POST['contenido']))?6:$_POST['contenido'];
-$_SESSION['formulario'] = (!isset($_POST['formulario']))?2:$_POST['formulario'];
+$_SESSION['tipo']=(isset($_SESSION['tipo']))?$_SESSION['tipo']:1;
+$_SESSION['contenido']=(isset($_SESSION['contenido']))?$_SESSION['contenido']:6;
+$_SESSION['formulario']=(isset($_SESSION['formulario']))?$_SESSION['formulario']:6;
+
 if (isset($_GET['a'])) {
     $article->BMultimedia($_GET['a']);
 }
@@ -24,6 +25,7 @@ function itipo($a){
   }
   echo $listado;
 }
+
 ?>
 
 <div class="row ficha">
@@ -56,8 +58,8 @@ function itipo($a){
 
               }
               ?>
-<form method="POST" action="upmultimedia.php" enctype="multipart/form-data" class="container">
-<h2>Actualizar <?php $article->txtTipo($_SESSION['tipo']); $article->txtContenido($contenido) ?></h2>
+<form method="POST" action="vardatos.php" class="container">
+<h2>Actualizar <?php $article->txtTipo($_SESSION['tipo']); $article->txtContenido($_SESSION['contenido']) ?></h2>
 
   <div class="form-group row">
     <select name="formulario" id="formulario"  class="col-3 form-control float-right" onchange="Cambiar()">
@@ -74,8 +76,12 @@ function itipo($a){
     </select>
     <button type="submit" class="col-3 btn btn btn-outline-success btn-sm">Generar Formulario</button>
   </div>
-
+</form>
+  
+<form method="POST" action="upMultimedia.php" enctype="multipart/form-data" class="container">
   <div class="form-group row">
+  <input type="text" name="tipo" value="<?php echo $_SESSION['tipo']?>">
+  <input type="text" name="contenido" value="<?php echo $_SESSION['contenido']?>">
     <label for="name" class="col-3 col-form-label">Nombre del Archivo</label>
     <input type="text" name="name" class="form-control col-9" value="<?php echo $article->gNombre()?>">
   </div>

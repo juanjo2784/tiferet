@@ -20,6 +20,9 @@ if($_SESSION['user']){
       case ($a=="adminmultimedia"):
         $contenido = "adminMultimedia.php";
       break;
+     /* case ($a=="upMultimedia"):
+        $contenido = "upMultimedia.php";
+      break;*/
       case ($a=="delMultimedia"):
         $contenido = "delMultimedia.php";
       break;
