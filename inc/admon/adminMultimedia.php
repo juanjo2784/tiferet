@@ -1,26 +1,9 @@
 <?php
 include_once "apiMultimedia.php";
 $article = new Multimedia;
-$tipo=0;
-$contenido = (!isset($_SESSION['contenido']) && !isset($_POST['contenido']))?6:$_POST['contenido'];
-$formulario = (!isset($_SESSION['formulario']) && !isset($_POST['formulario']))?2:$_POST['formulario'];
-$tipo = (!isset($_SESSION['tipo']) && !isset($_POST['tipo']))?1:$_POST['tipo'];
-//busqueda de articulos
-/*if (!isset($_SESSION['tipo']) && (!isset($_SESSION['contenido'])) && (!isset($_SESSION['formulario'])) && (!isset($_POST['tipo'])) && (!isset($_POST['contenido'])) && (!isset($_POST['formulario'])) ){
-  $_SESSION['tipo']=6;
-  $_SESSION['contenido']=1;
-  $_SESSION['formulario']=2;
-} elseif (!isset($_POST['tipo'])){
-  $_POST['tipo']=6;
-  $_POST['contenido']=1;
-  $_POST['formulario']=2;
-}else{
-  $_SESSION['tipo']=$_POST['tipo'];
-  $_SESSION['contenido']=$_POST['contenido'];
-  $_SESSION['formulario']=$_POST['formulario'];
-  $_GET['a']=null;
-}
-*/
+$_SESSION['tipo']=(!isset($_POST['tipo']))?1:$_POST['tipo'];
+$_SESSION['contenido'] = (!isset($_POST['contenido']))?6:$_POST['contenido'];
+$_SESSION['formulario'] = (!isset($_POST['formulario']))?2:$_POST['formulario'];
 if (isset($_GET['a'])) {
     $article->BMultimedia($_GET['a']);
 }
@@ -53,16 +36,19 @@ function itipo($a){
                     echo "<div class='alert alert-success alert-dismissible'>
                     <button type='button' class='close' data-dismiss='alert'>&times;</button>
                     <strong>Proceso finalizado sin errores!</strong></div>";
+                    $_SESSION['result']=null;
                   break;
                   case 2:
                     echo "<div class='alert danger-success alert-dismissible'>
                     <button type='button' class='close' data-dismiss='alert'>&times;</button>
                     <strong>Error! No se pudo terminar el proceso</strong></div>";
+                    $_SESSION['result']=null;
                   break;
                   case 3:
                     echo "<div class='alert danger-success alert-dismissible'>
                     <button type='button' class='close' data-dismiss='alert'>&times;</button>
                     <strong>No hay resultados en la busqueda</div>";
+                    $_SESSION['result']=null;
                   break;
                   default:
                   $_SESSION['result']=NULL;
@@ -70,8 +56,8 @@ function itipo($a){
 
               }
               ?>
-<form method="POST" action="" enctype="multipart/form-data" class="container">
-<h2>Actualizar <?php $article->txtTipo($tipo); $article->txtContenido($contenido) ?></h2>
+<form method="POST" action="upmultimedia.php" enctype="multipart/form-data" class="container">
+<h2>Actualizar <?php $article->txtTipo($_SESSION['tipo']); $article->txtContenido($contenido) ?></h2>
 
   <div class="form-group row">
     <select name="formulario" id="formulario"  class="col-3 form-control float-right" onchange="Cambiar()">
@@ -94,7 +80,7 @@ function itipo($a){
     <input type="text" name="name" class="form-control col-9" value="<?php echo $article->gNombre()?>">
   </div>
 
-  <?php if ($formulario != 2) {?>
+  <?php if ($_SESSION['formulario'] != 2) {?>
     <div class="form-group row">
     <label for="titulo" class="col-3 col-form-label">Titulo</label>
     <input type="text" name="titulo" class="col-9 form-control" value="<?php $article->gTitulo()?>">
@@ -105,7 +91,7 @@ function itipo($a){
     <input type="text" name="descripcion" class="col-9 form-control" value="<?php $article->gDescripcion()?>">
     </div>
   <?php } 
-  if ($formulario == 3) { ?>
+  if ($_SESSION['formulario'] == 3) { ?>
     <div class="form-group row">
     <label for="direccion" class="col-3 col-form-label">Dirección</label>
     <input type="text" name="direccion" class="col-9 form-control" value="<?php $article->gDir()?>">
@@ -149,7 +135,7 @@ function itipo($a){
 
 <div class="col-3">
   <div class="container">
-    <?php echo "<h4>".itipo($tipo)." ".$article->txtContenido($contenido)."</h4>"; $article->Listado($tipo,$contenido); ?>
+    <?php echo "<h4>".itipo($_SESSION['tipo'])." ".$article->txtContenido($_SESSION['contenido'])."</h4>"; $article->Listado($_SESSION['tipo'],$_SESSION['contenido']); ?>
   </div>
 </div>
 
