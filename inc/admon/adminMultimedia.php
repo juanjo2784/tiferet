@@ -80,8 +80,8 @@ function itipo($a){
   
 <form method="POST" action="upMultimedia.php" enctype="multipart/form-data" class="container">
   <div class="form-group row">
-  <input type="text" name="tipo" value="<?php echo $_SESSION['tipo']?>">
-  <input type="text" name="contenido" value="<?php echo $_SESSION['contenido']?>">
+  <input type="hidden" name="tipo" value="<?php echo $_SESSION['tipo']?>">
+  <input type="hidden" name="contenido" value="<?php echo $_SESSION['contenido']?>">
     <label for="name" class="col-3 col-form-label">Nombre del Archivo</label>
     <input type="text" name="name" class="form-control col-9" value="<?php echo $article->gNombre()?>">
   </div>
@@ -116,10 +116,10 @@ function itipo($a){
  $src="/../../upload/".$article->gNombre();
  switch($article->gTipo()){
    case 1:
-      echo "<center><img src=".$src."></center>";
+      echo "<center><img src=".$src." height='240'></center>";
    break;
    case 3:
-    echo "<center><video src=".$src." width='640' height='480' controls preload='auto'>Tu navegador no soporta MP4.</video></center>";
+    echo "<center><video src=".$src." width='320' height='240' controls preload='auto'>Tu navegador no soporta MP4.</video></center>";
    break;
    
    case 2:

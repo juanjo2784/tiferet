@@ -53,11 +53,12 @@ if(isset($_COOKIE['item'])){
     </div>
 
     <div class = "col-xs-12 col-lg-4">
-    <a href="?a=juegos" tabindex="4">
+    <a href="?a=recetas" tabindex="4">
       <div class="carta color5 cartap" id="sdc">
-        <div class="card-encabezado text-center"><i class="material-icons md50 cfi7">golf_course</i></div>
+        <!--div-- class="card-encabezado text-center"><i class="material-icons md50 cfi7">golf_course</i></!--div-->
+        <div class="card-encabezado text-center"><i class="material-icons md50 cfi7">restaurant_menu</i></div>
         <div class="card-body">
-          <h3 id="contenido" class="text-center">Juegos</h3>
+          <h3 id="contenido" class="text-center">Recetas</h3>
         </div>
       </div>
     </a>

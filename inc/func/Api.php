@@ -4,7 +4,6 @@ class BD {
   private static $user;
   private static $password;
   private static $host;
-  private static $bd;
   private $conn;
   private $consulta;
   private $respuesta = [];
@@ -13,17 +12,19 @@ class BD {
   private $icono;
   private $tcr;
   private $pb;
+  private $nimg;
   
 
   public function __construct() {
     self::$user = 'admin';
     self::$password = 3125480765;
+    self::$host = "mysql:host=localhost;dbname=bdtiferet";
   }
 
 //Metods
   function cnx(){
     try {
-      $this->conn = new PDO("mysql:host=localhost;dbname=bdtiferet",self::$user,self::$password);
+      $this->conn = new PDO(self::$host,self::$user,self::$password);
       $this->conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_SILENT);
     } catch (Exception $e) {
       echo "Error al conectar con la App";       
@@ -36,11 +37,11 @@ class BD {
       $this->consulta = $this->conn->prepare("select titulo, idArticulos from articulos where tipo = $tipo");
       $this->consulta->execute();
       $this->respuesta = $this->consulta->fetchAll();
+      echo '<ul>';
       foreach ($this->respuesta as $value){
-        echo '<ul>';
-        echo '<li><a href="?a='.(int)$value['idArticulos'].'">'.$value['titulo'].'</a></li>';
-        echo '</ul>';
+        echo '<li style="padding: 5px 0 5px 0;"><a href="?a='.(int)$value['idArticulos'].'">'.$value['titulo'].'</a></li>';
       }
+      echo '</ul>';
       $this->pb = $value['idArticulos'];
       //echo $this->gPb();
       } catch (Exception $e) {
@@ -54,7 +55,7 @@ class BD {
     $this->respuesta=NULL;
     $item = $_COOKIE['item'];
     try{
-      $this->consulta = $this->conn->prepare("select contenido, titulo, subtitulo, autor, fecha, tcr from articulos where titulo = '$item'");
+      $this->consulta = $this->conn->prepare("select contenido, titulo, subtitulo, autor, fecha, tcr, nimg from articulos where titulo = '$item'");
       $this->consulta->execute();
       $this->respuesta = $this->consulta->fetchAll(PDO::FETCH_ASSOC); 
       if ($this->respuesta){
@@ -65,6 +66,7 @@ class BD {
           $this->contenido = $valor['contenido'];
           $this->tcr = $valor['tcr'];
           $this->fecha = $valor['fecha'];
+          $this->nimg = $valor['nimg'];
         } 
       } else {
         throw new Exception("Estamos trabajando para mantener nuestros contenidos actualizados");
@@ -77,7 +79,7 @@ class BD {
 
   function bArticulo($p){
     $this->cnx();
-    $this->consulta = $this->conn->prepare("SELECT contenido, titulo, subtitulo, autor, fecha, tcr FROM articulos WHERE idArticulos = $p");
+    $this->consulta = $this->conn->prepare("SELECT contenido, titulo, subtitulo, autor, fecha, tcr, nimg FROM articulos WHERE idArticulos = $p");
     $this->consulta->execute();
     $this->respuesta = $this->consulta->fetchAll(PDO::FETCH_ASSOC);
     foreach($this->respuesta as $valor){
@@ -87,6 +89,7 @@ class BD {
       $this->contenido = $valor['contenido'];
       $this->tcr = $valor['tcr'];
       $this->fecha = $valor['fecha'];
+      $this->nimg = $valor['nimg'];
     }
     $this->dbClose();
   }
@@ -102,7 +105,7 @@ class BD {
         if($k==0){
           echo "<div class='row justify-content-center align-items-center'>";
         }
-      ?><a data-toggle='modal' data-target='#myModal<?php echo $value['idarchivo']?>' class='col-4'><img class='img-galeria img-fluid img-circle' src='/upload/<?php echo $value['nombre']?>'></a>
+      ?><a data-toggle='modal' data-target='#myModal<?php echo $value['idarchivo']?>' class='col-4'><img class='img-fluid img-thumbnail' src='/upload/<?php echo $value['nombre']?>' style="height:200px"></a>
         
       
       <div class='modal fade' id='myModal<?php echo $value['idarchivo']?>'>
@@ -116,11 +119,11 @@ class BD {
       <?php   
         $k+=1;
         if($k==3 || $k==$j){
-          echo "</div>";
+          echo "</div></br>";
           $k=0;
         }  
     }
-    echo "</div>";
+    echo "</div></br>";
     $this->dbClose();
   }
 
@@ -218,6 +221,15 @@ class BD {
   
   function gPb(){
     return $this->pb;
+  }
+
+  function gImg(){
+    if($this->nimg<>""){
+      echo "<center><img src='../../upload/$this->nimg'></center>";
+    }else{
+      echo "";
+    }
+    
    }
 
   function dbClose(){

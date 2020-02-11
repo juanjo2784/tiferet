@@ -51,6 +51,7 @@ switch($_SESSION['tipo']){
 
 ?>
     <div class="col-sx-11 col-xl-9 cartag">
+    <?php $status->gImg() ?>
       <h4><?php $status->gTitulo() ?></h4>
       <h1><?php $status -> gSubtitulo()?></h1>
       <p class="text-left">Por: <?php $status -> gAutor();echo"<br/>fecha: ";$status->gFecha(); ?></p>

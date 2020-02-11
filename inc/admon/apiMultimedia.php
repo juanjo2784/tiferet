@@ -2,6 +2,7 @@
 class Multimedia {
   private static $user;
   private static $password;
+  private static $host;
   private $conn;
   private $consulta;
   private $respuesta = [];
@@ -20,12 +21,14 @@ class Multimedia {
   public function __construct() {
     self::$user = 'admin';
     self::$password = 3125480765;
+    self::$host = "mysql:host=localhost;dbname=bdtiferet";
   }
 
 //Metods
   function cnx(){
     try {
-      $this->conn = new PDO("mysql:host=localhost;dbname=bdtiferet",self::$user,self::$password);
+      $this->conn = new PDO(self::$host,self::$user,self::$password);
+      $this->conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_SILENT);
     } catch (Exception $e) {
       echo "Error al conectar con la App";       
     }

@@ -1,5 +1,4 @@
 <?php 
-print_r($_POST);
 session_start();
 
     $_SESSION['tipo']=$_POST['tipo'];

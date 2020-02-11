@@ -164,6 +164,10 @@ body {
  url(/img/camp1.jpg);*/
 }
 
+img{
+  max-width: 100%;
+}
+
 .img{
   width: 100%;
 }
@@ -431,6 +435,7 @@ footer {
 
 ul{
   list-style:none;
+  word-wrap: break-word;
 }
 /********************** loader **************************/
 .animate-bottom {
