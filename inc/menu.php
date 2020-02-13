@@ -16,6 +16,9 @@
 
 <nav class="nav color3" id="pp">
   <ul class="d-flex flex-column">
+  <li>
+      <a class="nav-link" href="?a=Home" title="Link para acceso al HOME de la pagina"><span class="float-left">Home</span></a>
+    </li>
     <li>
       <a class="nav-link" href="?a=proyecto" title="Link para acceso a Información sobre la Asociación"><span class="float-left">¿Quienes Sómos?</span></a>
     </li>
@@ -29,13 +32,13 @@
       <a class="nav-link" href="?a=article&p=4" title="Link para acceso a Información las mejores recetas de nuestra comunidad Tiferet"><span class="float-left">Recetas</span></a>
     </li>
     <li>
-      <a class="nav-link" href="?a=article&p=5" title="Link para acceso a Información sobre nuestros valores"><span class="float-left">Tziniut</span></a>
+      <a class="nav-link" href="?a=article&p=5" title="Link para acceso a Información sobre leyes de Tziniut"><span class="float-left">Tziniut</span></a>
     </li>
     <li>
-      <a class="nav-link" href="#problema" title="Link para acceso a Información sobre el problema"><span class="float-left">Lugares recomendados</span></a>
+      <a class="nav-link" href="#problema" title="Link para acceso a Información sobre lugares recomendados para visitar"><span class="float-left">Lugares recomendados</span></a>
     </li>
     <li>
-      <a class="nav-link" href="?a=article&p=3" title="Link para acceso a Información sobre Nuestra Propuesta"><span class="float-left">Articulos de Emuna y Bitajon</span></a>
+      <a class="nav-link" href="?a=article&p=3" title="Link para acceso a Información articulos de Emuna y Bitajon"><span class="float-left">Articulos de Emuna y Bitajon</span></a>
     </li>
     <li>
       <a class="nav-link" href="?a=contacto" title="Link para acceso al formulario de contacto de la Asociación"><span class="float-left">Contactanos</span></a>

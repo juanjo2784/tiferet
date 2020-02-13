@@ -109,7 +109,7 @@ class BD {
         
       
       <div class='modal fade' id='myModal<?php echo $value['idarchivo']?>'>
-        <div class='modal-dialog modal-xl'><div class='modal-content'>
+        <div class='modal-dialog modal-lg'><div class='modal-content'>
             <div class='modal-header'><button type='button' class='close' data-dismiss='modal'>&times;</button></div>         
             <div class='modal-body'>
             <center><img src='/upload/<?php echo $value['nombre']?>' class='img-fluid rounded' style="width: 100%;"></img></center>
@@ -132,15 +132,15 @@ class BD {
     $src="/../../upload/".$name;
     switch($tipo){
       case 1:
-         $mostrar = "<button type='button' class='close' data-dismiss='modal' ><i class='material-icons md50 cfi7'>close</i></button><img src=".$src." class='img-fluid rounded'  >";
+         $mostrar = "<button type='button' class='close' data-dismiss='modal' aria-label='Close'><span aria-hidden='true'>&times;</span></button><img src=".$src." class='img-fluid rounded'  >";
       break;
       case 3:
-        $mostrar = "<button type='button' class='close' data-dismiss='modal' onclick='document.getElementById(\"archivo".$id."\").pause();'><i class='material-icons cfi7'>close</i></button><video id='archivo".$id."' src=".$src." width='640' height='480' preload='auto' controls controlslist='nodownload'>Tu navegador no soporta MP4.</video>";
+        $mostrar = "<button type='button' class='close' data-dismiss='modal' onclick='document.getElementById(\"archivo".$id."\").pause();' aria-label='Close'><span aria-hidden='true'>&times;</span></button><video id='archivo".$id."' src=".$src." width='640' height='480' preload='auto' controls controlslist='nodownload'>Tu navegador no soporta MP4.</video>";
         $this->icono = "local_movies";
       break;
       
       case 2:
-        $mostrar = "<button type='button' class='close' data-dismiss='modal' onclick='document.getElementById(\"archivo".$id."\").pause();'><i class='material-icons cfi7'>close</i></button><div class='cv'><audio id='archivo".$id."' src=".$src." preload='auto' controls controlslist='nodownload'>Tu navegador no Soporta MP3.</audio></div>";
+        $mostrar = "<button type='button' class='close' data-dismiss='modal' onclick='document.getElementById(\"archivo".$id."\").pause();' aria-label='Close'><span aria-hidden='true'>&times;</span></button><div class='cv'><audio id='archivo".$id."' src=".$src." preload='auto' controls controlslist='nodownload'>Tu navegador no Soporta MP3.</audio></div>";
         $this->icono = "music_video";
       break;
     };
@@ -180,7 +180,7 @@ class BD {
     </div>
         
         <div class='modal fade' id="myModal<?php echo $value['idarchivo'] ?>"  tabindex='5' role='dialog' >
-          <div class='modal-dialog modal-xl'><div class='modal-content'></div>
+          <div class='modal-dialog modal-lg'><div class='modal-content'></div>
           <div class='modal-content'><center><?php $this->gSrc($value['nombre'],$tipo,$value['idarchivo']) ?></center></div>           
         </div>
       </div>

@@ -35,7 +35,7 @@ switch($_SESSION['tipo']){
 <div class="container-fluid">
  <div class="row text-justify">
 
-    <div class="col-sx-11 col-xl-2">
+    <div class="col-sx-11 col-md-2">
        <h5><?php echo $listado?></h5>
        <?php $status -> ListadoArticulos($_SESSION['tipo']); 
        $_SESSION['pb']=$status->gPb();
@@ -50,7 +50,7 @@ switch($_SESSION['tipo']){
 }
 
 ?>
-    <div class="col-sx-11 col-xl-9 cartag">
+    <div class="col-sx-11 col-md-9 cartag">
     <?php $status->gImg() ?>
       <h4><?php $status->gTitulo() ?></h4>
       <h1><?php $status -> gSubtitulo()?></h1>
@@ -58,9 +58,9 @@ switch($_SESSION['tipo']){
       <p><?php $status -> gContenido(); ?></p>
       <h6><?php $status -> gTcr(); ?></h6>
       <div>
-      <?php $status->gMultimedia($_SESSION['tipo'],2)?>
-      <?php $status->gMultimedia($_SESSION['tipo'],3)?>
-    </div>
+        <?php $status->gMultimedia($_SESSION['tipo'],2)?>
+        <?php $status->gMultimedia($_SESSION['tipo'],3)?>
+      </div>
     </div>
 
  </div>

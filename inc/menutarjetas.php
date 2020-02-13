@@ -4,7 +4,7 @@ if(isset($_COOKIE['item'])){
 }
 ?>  
   <div class = "row ficha">
-    <div class = "col-xs-12 col-lg-4">
+    <div class = "col-xs-12 col-md-4">
        <a href="?a=Parashat" tabindex="4">
         <div class="carta color5" id="sdc">
           <div class="card-encabezado text-center"><i class="material-icons md50 cfi7">local_parking</i></div>
@@ -15,7 +15,7 @@ if(isset($_COOKIE['item'])){
       </a>
     </div>
 
-    <div class = "col-xs-12 col-lg-4">
+    <div class = "col-xs-12 col-md-4">
     <a href="?a=eventos" tabindex="4">
       <div class="carta color5" id="sdc">
               <div class="card-encabezado text-center"><i class="material-icons md50 cfi7">today</i></div>
@@ -26,7 +26,7 @@ if(isset($_COOKIE['item'])){
       </a>
     </div>
 
-    <div class = "col-xs-12 col-lg-4">
+    <div class = "col-xs-12 col-md-4">
     <a href="?a=article&p=2" tabindex="4">
       <div class="carta color5" id="sdc">
               <div class="card-encabezado text-center"><i class="material-icons md50 cfi7">leak_add</i></div>
@@ -41,7 +41,7 @@ if(isset($_COOKIE['item'])){
 
   <div class = "row ficha">
 
-    <div class = "col-xs-12 col-lg-4 ">
+    <div class = "col-xs-12 col-md-4 ">
     <a href="?a=galeria" tabindex="4">
       <div class="carta color5 cartap" id="sdc">
         <div class="card-encabezado text-center"><i class="material-icons md50 cfi7">photo_camera</i></div>
@@ -52,7 +52,7 @@ if(isset($_COOKIE['item'])){
     </a>
     </div>
 
-    <div class = "col-xs-12 col-lg-4">
+    <div class = "col-xs-12 col-md-4">
     <a href="?a=recetas" tabindex="4">
       <div class="carta color5 cartap" id="sdc">
         <!--div-- class="card-encabezado text-center"><i class="material-icons md50 cfi7">golf_course</i></!--div-->
@@ -64,7 +64,7 @@ if(isset($_COOKIE['item'])){
     </a>
     </div>
 
-    <div class = "col-xs-12 col-lg-4">
+    <div class = "col-xs-12 col-md-4">
     <a href="?a=article&p=3" tabindex="4">
         <div class="carta color5 cartap" id="sdc">
           <div class="card-encabezado text-center"><i class="material-icons md50 cfi7">fitness_center</i></div>

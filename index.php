@@ -47,19 +47,19 @@
 
 </script>
 
-<body onload="myFunction()">
+<body onload="myFunction()" id="miDiv">
 
 <header>
   <nav class="navbar navbar-expand-lg navbar-light bg-light">
     <a class="navbar-brand" href="?a=Home"><img src="img/icon2.png" alt="logo TIFERET"> </a>
 
-    <div class="d-none d-md-block mx-auto">
+    <!--div-- class="d-none d-md-block mx-auto">
       <ul class="navbar-nav ">
         <li class="nav-item"><a class="nav-link" href="?a=Home">Home</a></li>
         <li class="nav-item"><a class="nav-link" href="?a=proyecto">Nuestro Proyecto</a></li>
         <li class="nav-item"><a class="nav-link" href="">Fundaciones de Apoyo</a></li>
       </ul>
-    </div>
+    </!--div-->
 
   </nav>
 </header>

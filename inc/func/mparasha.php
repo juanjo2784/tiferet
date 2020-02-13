@@ -1,6 +1,6 @@
 <?php 
 require_once('Api.php');
-echo getcwd();
+//echo getcwd();
 //archivo de pasahat hayom
 $item = $_COOKIE['item'];
 $status = new BD();
@@ -10,18 +10,22 @@ $_SESSION['tipo']=1;
 
 <div class="container-fluid">
  <div class="row cp text-justify">
-     <div class="col-sx-11 col-xl-2">
+     <div class="col-sx-11 col-md-2">
        <h5>Parashot</h5>
        <?php $status -> ListadoArticulos($_SESSION['tipo']); ?>
     </div>
 
-    <div class="col-sx-11 col-xl-9 cartag">
+    <div class="col-sx-11 col-md-9 cartag">
     <?php $status->gImg() ?>
       <h4><?php echo $item ?></h4>
       <h1><?php $status -> gSubtitulo()?></h1>
       <p class="text-left">Por: <?php $status -> gAutor();echo"<br/>fecha: ";$status->gFecha(); ?></p>
       <p><?php $status -> gContenido(); ?></p>
       <h6><?php $status -> gTcr(); ?></h6>
+      <div>
+        <?php $status->gMultimedia($_SESSION['tipo'],2)?>
+        <?php $status->gMultimedia($_SESSION['tipo'],3)?>
+      </div>
     </div>
 
  </div>

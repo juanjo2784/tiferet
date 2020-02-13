@@ -1,6 +1,6 @@
 <div class="row">
 
-	<div class="clearfix col-lg-4 d-none d-md-block">
+	<div class="clearfix col-md-4 d-none d-md-block">
 		<div class="parasha">
 			<img class="img-fluid mx-auto d-block" src="img/Logo.png" alt="logo TIFERET">
       <div class="container pt-3">
@@ -12,7 +12,7 @@
 		</div>
 	</div>
 
-	<div class="clearfix col-xs-12 col-lg-8">
+	<div class="clearfix col-xs-12 col-md-8">
 
     <div class="container">
       <div class=" container color5 cartag pt-3">

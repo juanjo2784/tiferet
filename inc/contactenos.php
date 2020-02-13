@@ -1,4 +1,4 @@
-<div class = "container col-sx-12 col-lg-12 cartag color2 clearfix">
+<div class = "container col-sx-12 col-md-12 cartag color2 clearfix">
   <div class="row">
 
   <div class="col-4 d-none d-sm-none d-md-block card-encabezado text-center">
