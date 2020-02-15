@@ -57,11 +57,10 @@ switch($_SESSION['tipo']){
       <p class="text-left">Por: <?php $status -> gAutor();echo"<br/>fecha: ";$status->gFecha(); ?></p>
       <p><?php $status -> gContenido(); ?></p>
       <h6><?php $status -> gTcr(); ?></h6>
-      <div>
+    </div>
+ </div>
+ <div class="row d-flex flex-wrap">
         <?php $status->gMultimedia($_SESSION['tipo'],2)?>
         <?php $status->gMultimedia($_SESSION['tipo'],3)?>
-      </div>
     </div>
-
- </div>
 </div>

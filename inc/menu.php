@@ -1,10 +1,10 @@
 <!--a class='flotante' href='#' ><img src='img/km.png'/></a-->
 <ul class="flotante d-none d-sm-none d-md-block">
-  <li ><a href="?a=contacto" title="Link para acceso al formulario de contacto de la Asociación"><i class="material-icons md5 cfm">perm_phone_msg</i></a></li> 
-  <li><a href="?a=contacto" title="Link para acceso a Información sobre la Asociación"><i class="material-icons md5 cfm">account_circle</i></a></li>
-  <li><a href="#propuesta" title="Link para acceso a Información sobre Nuestra Propuesta"><i class="material-icons md5 cfm">touch_app</i></a></li>
-  <li><a title="Aumentar fuente" id="A"><span class="Iletras cfm">+A</span></a></li>
-  <li><a title="Disminuir fuente" id="B"><span class="Iletras cfm">-A</span></a></li>
+  <li ><a href="?a=Home" title="Link para acceso al Home"><i class="material-icons md5 cfm">home</i></a></li> 
+  <li><a href="?a=contacto" title="Link para acceso al formulario de Contactanos"><i class="material-icons md5 cfm">account_circle</i></a></li>
+  <li><a href="?a=Parashat" title="Link para acceso a Pasasha haShavua"><i class="material-icons md5 cfm">local_parking</i></a></li>
+  <li><a href="?a=eventos" title="Link para acceso a Pasasha haShavua"><i class="material-icons md5 cfm">today</i></a></li>
+  <!--li><a title="Disminuir fuente" id="B"><span class="Iletras cfm">-A</span></a></!--li>-->
 </ul>
 
 

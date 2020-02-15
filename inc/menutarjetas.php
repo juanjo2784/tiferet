@@ -3,10 +3,10 @@ if(isset($_COOKIE['item'])){
   $item = $_COOKIE['item'];
 }
 ?>  
-  <div class = "row ficha">
-    <div class = "col-xs-12 col-md-4">
+  <div class = "row ficha d-flex flex-wrap">
+    <div class="tg carta color5 flex-fill">
        <a href="?a=Parashat" tabindex="4">
-        <div class="carta color5" id="sdc">
+        <div class="" id="sdc">
           <div class="card-encabezado text-center"><i class="material-icons md50 cfi7">local_parking</i></div>
             <div class="card-body">
               <h4 id="contenido" class="text-center"></h4>
@@ -15,9 +15,9 @@ if(isset($_COOKIE['item'])){
       </a>
     </div>
 
-    <div class = "col-xs-12 col-md-4">
+    <div class="tg carta color5 flex-fill">
     <a href="?a=eventos" tabindex="4">
-      <div class="carta color5" id="sdc">
+      <div class="" id="sdc">
               <div class="card-encabezado text-center"><i class="material-icons md50 cfi7">today</i></div>
               <div class="card-body">
                 <h4 class="text-center">Eventos</h4>
@@ -26,9 +26,9 @@ if(isset($_COOKIE['item'])){
       </a>
     </div>
 
-    <div class = "col-xs-12 col-md-4">
+    <div class="tg carta color5 flex-fill">
     <a href="?a=article&p=2" tabindex="4">
-      <div class="carta color5" id="sdc">
+      <div class="" id="sdc">
               <div class="card-encabezado text-center"><i class="material-icons md50 cfi7">leak_add</i></div>
               <div class="card-body">
                 <h3 id="contenido" class="text-center">Segulot</h3>
@@ -37,13 +37,9 @@ if(isset($_COOKIE['item'])){
       </a>
     </div>
 
-  </div>
-
-  <div class = "row ficha">
-
-    <div class = "col-xs-12 col-md-4 ">
+    <div class="tg carta color5 flex-fill">
     <a href="?a=galeria" tabindex="4">
-      <div class="carta color5 cartap" id="sdc">
+      <div class="" id="sdc">
         <div class="card-encabezado text-center"><i class="material-icons md50 cfi7">photo_camera</i></div>
         <div class="card-body">
           <h3 id="contenido" class="text-center">Galeria</h3>
@@ -52,9 +48,9 @@ if(isset($_COOKIE['item'])){
     </a>
     </div>
 
-    <div class = "col-xs-12 col-md-4">
+    <div class="tg carta color5 flex-fill">
     <a href="?a=recetas" tabindex="4">
-      <div class="carta color5 cartap" id="sdc">
+      <div class="" id="sdc">
         <!--div-- class="card-encabezado text-center"><i class="material-icons md50 cfi7">golf_course</i></!--div-->
         <div class="card-encabezado text-center"><i class="material-icons md50 cfi7">restaurant_menu</i></div>
         <div class="card-body">
@@ -64,13 +60,12 @@ if(isset($_COOKIE['item'])){
     </a>
     </div>
 
-    <div class = "col-xs-12 col-md-4">
+    <div class="tg carta color5 flex-fill">
     <a href="?a=article&p=3" tabindex="4">
-        <div class="carta color5 cartap" id="sdc">
+        <div class="" id="sdc">
           <div class="card-encabezado text-center"><i class="material-icons md50 cfi7">fitness_center</i></div>
             <div class="card-body">
               <h3 class="text-center">Emuná y Bitajón</h3>
-              <h6 class="text-center">Artículos y videos</h6>
             </div>
           </div>
         <div><?php include "inc/mpropuesta.php"?></div>

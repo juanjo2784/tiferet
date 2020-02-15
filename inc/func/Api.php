@@ -27,7 +27,7 @@ class BD {
       $this->conn = new PDO(self::$host,self::$user,self::$password);
       $this->conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_SILENT);
     } catch (Exception $e) {
-      echo "Error al conectar con la App";       
+      echo "Error al conectar con la App ".$e ;       
     }
   }
 
@@ -102,28 +102,15 @@ class BD {
     $k=0;
     $j=count($this->respuesta);
       foreach($this->respuesta as $value){
-        if($k==0){
-          echo "<div class='row justify-content-center align-items-center'>";
-        }
-      ?><a data-toggle='modal' data-target='#myModal<?php echo $value['idarchivo']?>' class='col-4'><img class='img-fluid img-thumbnail' src='/upload/<?php echo $value['nombre']?>' style="height:200px"></a>
-        
-      
-      <div class='modal fade' id='myModal<?php echo $value['idarchivo']?>'>
-        <div class='modal-dialog modal-lg'><div class='modal-content'>
-            <div class='modal-header'><button type='button' class='close' data-dismiss='modal'>&times;</button></div>         
-            <div class='modal-body'>
-            <center><img src='/upload/<?php echo $value['nombre']?>' class='img-fluid rounded' style="width: 100%;"></img></center>
-            </div>    
-         </div>
-      </div></div>
+      ?>
+    <div class="col-lg-3 col-md-4 col-xs-6 thumb">
+        <a href='/upload/<?php echo $value['nombre']?>' class="fancybox" rel="ligthbox">
+            <img  src='/upload/<?php echo $value['nombre']?>' class="zoom img-fluid "  alt="">
+        </a>
+    </div>
+    
       <?php   
-        $k+=1;
-        if($k==3 || $k==$j){
-          echo "</div></br>";
-          $k=0;
-        }  
     }
-    echo "</div></br>";
     $this->dbClose();
   }
 
@@ -132,15 +119,15 @@ class BD {
     $src="/../../upload/".$name;
     switch($tipo){
       case 1:
-         $mostrar = "<button type='button' class='close' data-dismiss='modal' aria-label='Close'><span aria-hidden='true'>&times;</span></button><img src=".$src." class='img-fluid rounded'  >";
+         $mostrar = "<button type='button' class='close' data-dismiss='modal' aria-label='Close'><i class='large material-icons'>close</i></button><img src=".$src." class='img-fluid rounded'  >";
       break;
       case 3:
-        $mostrar = "<button type='button' class='close' data-dismiss='modal' onclick='document.getElementById(\"archivo".$id."\").pause();' aria-label='Close'><span aria-hidden='true'>&times;</span></button><video id='archivo".$id."' src=".$src." width='640' height='480' preload='auto' controls controlslist='nodownload'>Tu navegador no soporta MP4.</video>";
+        $mostrar = "<a type='button' class='close2' data-dismiss='modal' onclick='document.getElementById(\"archivo".$id."\").pause();'><i class='large material-icons md15'>close</i></a><div class='cv'><video id='archivo".$id."' src=".$src." width='100%' preload='auto' controls controlslist='nodownload'>Tu navegador no soporta MP4.</video></div>";
         $this->icono = "local_movies";
       break;
       
       case 2:
-        $mostrar = "<button type='button' class='close' data-dismiss='modal' onclick='document.getElementById(\"archivo".$id."\").pause();' aria-label='Close'><span aria-hidden='true'>&times;</span></button><div class='cv'><audio id='archivo".$id."' src=".$src." preload='auto' controls controlslist='nodownload'>Tu navegador no Soporta MP3.</audio></div>";
+        $mostrar = "<a type='button' class='close2' data-dismiss='modal' onclick='document.getElementById(\"archivo".$id."\").pause();'><i class='large material-icons md15'>close</i></a><div class='cv'><audio id='archivo".$id."' src=".$src." preload='auto' controls controlslist='nodownload'>Tu navegador no Soporta MP3.</audio></div>";
         $this->icono = "music_video";
       break;
     };
@@ -171,9 +158,9 @@ class BD {
           echo "<div class='row justify-content-center align-items-center'>"; 
         }
     ?>
-    <div class = 'col-xs-12 col-lg-4'>
-      <a data-toggle='modal' data-target="#myModal<?php echo $value['idarchivo'] ?>" data-backdrop="static" data-keyboard="false" onclick="document.getElementById('archivo<?php echo $value['idarchivo'] ?>').play();" class="col-4">
-        <div class='carta color5' id='sdc'>
+    <div class = 'tm flex-fill'>
+      <a data-toggle='modal' data-target="#myModal<?php echo $value['idarchivo'] ?>" data-backdrop="static" data-keyboard="false" onclick="document.getElementById('archivo<?php echo $value['idarchivo'] ?>').play();">
+        <div class='carta color5'>
             <div class='card-encabezado text-center'><i class='material-icons md50 cfi7'><?php echo $this->gIcono($tipo) ?></i></div>
             <div class='card-body'><h4 class='text-center'><?php echo $value['titulo'] ?></h4></div>
         </div></a>
