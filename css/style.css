@@ -214,13 +214,13 @@ h3{
     max-width: 100%;
   }
 
-  .hsb{
-    width: 100%;
-  }
-
-  .trj{
+   .trj{
     width: 90%;
     margin-left: 5%;
+  }
+
+  .parasha{
+    height: 98%;
   }
 }
 @media screen and (max-width:1024px) and (min-width:640px) {
@@ -240,6 +240,10 @@ h3{
     width: 45%;
     margin-left: 5%;
   }
+  .parasha{
+    height: 98%;
+  }
+
 }
 @media screen and (min-width:1024px) {
   .tg{
@@ -257,6 +261,10 @@ h3{
   .trj{
     width: 60%;
     margin-left: 5%;
+  }
+
+  .parasha{
+    height: 85%;
   }
 }
 .cartag{
@@ -432,11 +440,9 @@ input {
 .parasha {
   background-color: rgba(173, 26, 82, 0.733);
   padding: 8px;
-  height: 98%;
   color: white;
   border-radius: 15px;
   margin-top: 5px;
-  margin-bottom: 5px;
 }
 
 .parasha a {
@@ -579,7 +585,20 @@ ul{
 /*Audio*/
 .cv{
   padding-top: 35px;
+  height: 0;
+  overflow: hidden;
+  padding-bottom: 56.25%;
+  padding-top: 30px;
+  position: relative;
 }
+
+.cv iframe, .video-responsive object, .video-responsive embed {
+  height: 100%;
+  left: 0;
+  position: absolute;
+  top: 0;
+  width: 100%;
+  }
 
 .img-galeria{
   padding: 12px;
@@ -643,3 +662,66 @@ img.zoom {
       display:none;  
     }
 /* fin estilos galeria*/
+/* Estilos del tab */
+.tabs {
+  margin: 0 auto;
+  }
+#tab-button {
+  display: table;
+  table-layout: fixed;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+#tab-button li {
+  display: table-cell;
+  width: 20%;
+  border-bottom: 2px solid rgb(105, 186, 233);
+}
+#tab-button li a {
+  display: block;
+  padding: .5em;
+  background: transparent;
+  text-align: center;
+  color: #000;
+  text-decoration: none;
+}
+#tab-button li:not(:first-child) a {
+  border-left: none;
+}
+#tab-button li a:hover,
+#tab-button .is-active a {
+  border-bottom-color: transparent;
+  background:  rgba(7, 162, 251, 0.76);;
+  color: white;
+}
+.tab-contents {
+  padding: 0;
+}
+
+.tab-button-outer {
+  display: none;
+}
+.tab-contents {
+  margin-top: 20px;
+}
+@media screen and (min-width: 768px) {
+  .tab-button-outer {
+    position: relative;
+    z-index: 2;
+    display: block;
+  }
+  .tab-select-outer {
+    display: none;
+  }
+  .tab-contents {
+    position: relative;
+    top: -1px;
+    margin-top: 0;
+  }
+}
+
+h2{
+  padding-top: 5px;
+}

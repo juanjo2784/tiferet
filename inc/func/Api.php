@@ -39,11 +39,11 @@ class BD {
       $this->respuesta = $this->consulta->fetchAll();
       echo '<ul>';
       foreach ($this->respuesta as $value){
-        echo '<li style="padding: 5px 0 5px 0;"><a href="?a='.(int)$value['idArticulos'].'">'.$value['titulo'].'</a></li>';
+        echo '<li style="padding: 5px 0 5px 0;"><a href="'.(int)$value['idArticulos'].'">'.$value['titulo'].'</a></li>';
       }
       echo '</ul>';
       $this->pb = $value['idArticulos'];
-      //echo $this->gPb();
+      //  echo $this->gPb();
       } catch (Exception $e) {
       echo "Error al realizar la consulta";   
     }
@@ -165,10 +165,8 @@ class BD {
             <div class='card-body'><h4 class='text-center'><?php echo $value['titulo'] ?></h4></div>
         </div></a>
     </div>
-        
-        <div class='modal fade' id="myModal<?php echo $value['idarchivo'] ?>"  tabindex='5' role='dialog' >
-          <div class='modal-dialog modal-lg'><div class='modal-content'></div>
-          <div class='modal-content'><center><?php $this->gSrc($value['nombre'],$tipo,$value['idarchivo']) ?></center></div>           
+      <div class='modal fade' id="myModal<?php echo $value['idarchivo'] ?>"  tabindex='5' role='dialog' >
+          <div class='modal-dialog modal-lg'><div class='modal-content'><center><?php $this->gSrc($value['nombre'],$tipo,$value['idarchivo']) ?></center></div>           
         </div>
       </div>
     <?php  
@@ -181,6 +179,42 @@ class BD {
 
     $this->dbClose();
   }
+
+  function gYoutube($categoria){
+    $this->cnx();
+    $this->consulta = $this->conn->prepare("SELECT titulo, idvideo, vurl FROM youtube WHERE tipo = $categoria");
+    $this->consulta->execute();
+    $this->respuesta = $this->consulta->fetchAll(PDO::FETCH_ASSOC);
+    $k=0;
+    $j=count($this->respuesta);
+      foreach($this->respuesta as $value){
+        if($k==0){
+          echo "<div class='row justify-content-center align-items-center'>"; 
+        }
+    ?>
+      <div class = 'tm flex-fill'>
+        <a data-toggle='modal' data-target="#myModal<?php echo $value['idvideo'];?>" onclick="$(function() {$('#vy<?php echo $value['idvideo'];?>').children('iframe').attr('src','<?php echo $value['vurl'] ?>?autoplay=1' );});">
+          <div class='carta color5'>
+              <div class='card-encabezado text-center'><i class='material-icons md50 cfi7'>play_arrow</i></div>
+              <div class='card-body'><h4 class='text-center'><?php echo $value['titulo'] ?></h4></div>
+          </div></a>
+      </div>
+        <div class='modal fade' id="myModal<?php echo $value['idvideo']; ?>"  tabindex='5' role='dialog' >
+          <div class='modal-dialog modal-lg'><div class='modal-content'><center><a type='button' class='close2' data-dismiss='modal' onclick="$(function() {$('#vy<?php echo $value['idvideo'];?>').children('iframe').attr('src', '');});"><i class='large material-icons md15'>close</i></a><div class='cv' id="vy<?php echo $value['idvideo'];?>" >
+          <iframe frameborder="0" allow="accelerometer; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+          </div></center></div>           
+        </div>
+      </div>
+    <?php  
+        $k+=1;
+        if($k==3 || $k==$j){
+          echo "</div>";
+          $k=0;
+        }  
+    }  
+    $this->dbClose();
+  }
+
 
   function gTitulo(){
     echo $this->titulo;
@@ -212,7 +246,7 @@ class BD {
 
   function gImg(){
     if($this->nimg<>""){
-      echo "<center><img src='../../upload/$this->nimg'></center>";
+      echo "<img src='../../upload/$this->nimg' style='width:100%; padding:0;'>";
     }else{
       echo "";
     }

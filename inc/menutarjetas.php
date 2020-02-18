@@ -5,7 +5,7 @@ if(isset($_COOKIE['item'])){
 ?>  
   <div class = "row ficha d-flex flex-wrap">
     <div class="tg carta color5 flex-fill">
-       <a href="?a=Parashat" tabindex="4">
+       <a href="<?php echo $_SESSION['sr'] ?>Parashat/" tabindex="4">
         <div class="" id="sdc">
           <div class="card-encabezado text-center"><i class="material-icons md50 cfi7">local_parking</i></div>
             <div class="card-body">
@@ -16,7 +16,7 @@ if(isset($_COOKIE['item'])){
     </div>
 
     <div class="tg carta color5 flex-fill">
-    <a href="?a=eventos" tabindex="4">
+    <a href="<?php echo $_SESSION['sr'] ?>eventos/" tabindex="4">
       <div class="" id="sdc">
               <div class="card-encabezado text-center"><i class="material-icons md50 cfi7">today</i></div>
               <div class="card-body">
@@ -27,7 +27,7 @@ if(isset($_COOKIE['item'])){
     </div>
 
     <div class="tg carta color5 flex-fill">
-    <a href="?a=article&p=2" tabindex="4">
+    <a href="<?php echo $_SESSION['sr'] ?>article/2/" tabindex="4">
       <div class="" id="sdc">
               <div class="card-encabezado text-center"><i class="material-icons md50 cfi7">leak_add</i></div>
               <div class="card-body">
@@ -38,7 +38,7 @@ if(isset($_COOKIE['item'])){
     </div>
 
     <div class="tg carta color5 flex-fill">
-    <a href="?a=galeria" tabindex="4">
+    <a href="<?php echo $_SESSION['sr'] ?>galeria/" tabindex="4">
       <div class="" id="sdc">
         <div class="card-encabezado text-center"><i class="material-icons md50 cfi7">photo_camera</i></div>
         <div class="card-body">
@@ -49,7 +49,7 @@ if(isset($_COOKIE['item'])){
     </div>
 
     <div class="tg carta color5 flex-fill">
-    <a href="?a=recetas" tabindex="4">
+    <a href="<?php echo $_SESSION['sr'] ?>recetas/4/" tabindex="4">
       <div class="" id="sdc">
         <!--div-- class="card-encabezado text-center"><i class="material-icons md50 cfi7">golf_course</i></!--div-->
         <div class="card-encabezado text-center"><i class="material-icons md50 cfi7">restaurant_menu</i></div>
@@ -61,7 +61,7 @@ if(isset($_COOKIE['item'])){
     </div>
 
     <div class="tg carta color5 flex-fill">
-    <a href="?a=article&p=3" tabindex="4">
+    <a href="<?php echo $_SESSION['sr'] ?>article/3/" tabindex="4">
         <div class="" id="sdc">
           <div class="card-encabezado text-center"><i class="material-icons md50 cfi7">fitness_center</i></div>
             <div class="card-body">

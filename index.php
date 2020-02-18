@@ -1,4 +1,7 @@
-<?php session_start()?>
+<?php 
+session_start();
+$_SESSION['sr'] = "http://localhost/";
+?>
 <!DOCTYPE html>
 
 <html lang="es">
@@ -22,14 +25,14 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.2/animate.min.css">
-  <link href="css/style.css" rel="stylesheet">
-  <link href="css/menu.css" rel="stylesheet">
+  <link href= "<?php echo $_SESSION['sr'] ?>css/style.css" rel="stylesheet">
+  <link href="<?php echo $_SESSION['sr'] ?>css/menu.css" rel="stylesheet">
   <!--script-- src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></!--script-->
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-  <script src="inc/validar.js"></script>
+  <script src="<?php echo $_SESSION['sr'] ?>inc/validar.js"></script>
   <!--script-- src="inc/ApiHebCal.js"></!--script-->
 </head>
 
@@ -51,7 +54,7 @@
 
 <header>
   <nav class="navbar navbar-expand-lg navbar-light bg-light">
-    <a class="navbar-brand" href="?a=Home"><img src="img/icon2.png" alt="logo TIFERET"> </a>
+    <a class="navbar-brand" href="<?php echo $_SESSION['sr'] ?>Home/"><img src="<?php echo $_SESSION['sr'] ?>img/icon2.png" alt="logo TIFERET"> </a>
 
     <!--div-- class="d-none d-md-block mx-auto">
       <ul class="navbar-nav ">

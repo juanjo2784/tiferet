@@ -2,7 +2,7 @@
 <div class="row">
 
   <div class="col-xs-12 col-sm-3">
-    <img class="logo" id="imlogo" src="/img/Logo.png" alt="Logo de la Asociadion" longdesc="inc/logodescription.html" >
+    <img class="logo" id="imlogo" src="<?php echo $_SESSION['sr'] ?>img/Logo.png" alt="Logo de la Asociadion" longdesc="inc/logodescription.html" >
   </div>
 
   <div class="col-xs-12 col-sm-4" >
@@ -14,7 +14,7 @@
   <div class="col-xs-12 col-sm-4">
     <div class="container">
     <address>
-    <h1><img src="img/letras.png" alt=""></h1>
+    <h1><img src="<?php echo $_SESSION['sr'] ?>img/letras.png" alt=""></h1>
     <table>
       <tbody>
       <tr>
