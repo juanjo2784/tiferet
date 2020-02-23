@@ -21,18 +21,18 @@ $_SESSION['tipo']=1;
     <div class="tabs">
       <div class="tab-button-outer">
         <ul id="tab-button">
-          <li><a href="#tab01">Articulo</a></li>
-          <li><a href="#tab02">Video</a></li>
-          <li><a href="#tab03">Audio</a></li>
-          <li><a href="#tab04">YouTube</a></li>
+          <li><a href="#Articulo">Articulo</a></li>
+          <li><a href="#Video">Video</a></li>
+          <li><a href="#Audio">Audio</a></li>
+          <li><a href="#Canal">YouTube</a></li>
         </ul>
       </div>
       <div class="tab-select-outer">
         <select id="tab-select">
-          <option value="#tab01">Articulo</option>
-          <option value="#tab02">Videos</option>
-          <option value="#tab03">Audio</option>
-          <option value="#tab04">YouTube</option>
+          <option value="#Articulo">Articulo</option>
+          <option value="#Video">Videos</option>
+          <option value="#Audio">Audio</option>
+          <option value="#Canal">YouTube</option>
         </select>
       </div>
       <?php 
@@ -44,24 +44,24 @@ $_SESSION['tipo']=1;
         $status-> bArticulo($var[1]);
         }
       ?>
-      <div id="tab01" class="tab-contents">
+      <div id="Articulo" class="tab-contents">
         <?php $status->gImg() ?>
         <h4><?php $status->gTitulo() ?></h4>
         <p class="text-left">Por: <?php $status -> gAutor();echo"<br/>fecha: ";$status->gFecha(); ?></p>
           <p><?php $status -> gContenido(); ?></p>
           <h6><?php $status -> gTcr(); ?></h6>
       </div>
-      <div id="tab02" class="tab-contents">
+      <div id="Video" class="tab-contents">
         <h2>Videos exclusivos de nuestra Página</h2>
         <?php $status->gMultimedia($_SESSION['tipo'],3)?>
       </div>
-      <div id="tab03" class="tab-contents">
+      <div id="Audio" class="tab-contents">
         <h2>Audios</h2>
         <?php $status->gYoutube($_SESSION['tipo'])?>
       </div>
-      <div id="tab04" class="tab-contents">
+      <div id="Canal" class="tab-contents">
         <h2>Videos de Nuestro Canal</h2>
-        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eius quos aliquam consequuntur, esse provident impedit minima porro! Laudantium laboriosam culpa quis fugiat ea, architecto velit ab, deserunt rem quibusdam voluptatum.</p>
+        <?php $status->gYoutube($_SESSION['tipo'])?>
       </div>
     </div>
 <!------ tabs ---------->

@@ -23,7 +23,7 @@ if(!isset($_GET['a'])){
     $contenido="inc/func/sd.php";
    break;
    case ($a[0] == "eventos"):
-    $contenido="inc/func/sd.php";
+    $contenido="inc/func/cronograma.php";
    break;
     case ($a[0] == "article"):
     $contenido="inc/func/bArticulo.php";
