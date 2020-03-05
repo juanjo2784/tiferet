@@ -27,16 +27,54 @@ $_SESSION['sr'] = "http://localhost/";
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.2/animate.min.css">
   <link href= "<?php echo $_SESSION['sr'] ?>css/style.css" rel="stylesheet">
   <link href="<?php echo $_SESSION['sr'] ?>css/menu.css" rel="stylesheet">
-  <!--script-- src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></!--script-->
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.4.1.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
   <script src="<?php echo $_SESSION['sr'] ?>inc/validar.js"></script>
-  <!--script-- src="inc/ApiHebCal.js"></!--script-->
-</head>
+<?php 
+$evento = (isset($_GET['a']))?explode("/", $_GET['a']):"";
+if ($evento[0] == "eventos"){
+  ?>
+<link href='../calendario/core/main.css' rel='stylesheet' />
+<link href='../calendario/daygrid/main.css' rel='stylesheet' />
 
+<script src='../calendario/core/main.js'></script>
+<script src='../calendario/daygrid/main.js'></script>
+<script src='../calendario/interaction/main.js'></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
+<script rel="stylesheet" src="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/8.11.8/sweetalert2.min.css"></script>
 <script>
+let texto;
+
+  document.addEventListener('DOMContentLoaded', function(){
+  var calendarEl = document.getElementById('calendar');
+  $("#loader").css("display","none");
+  $("#myDiv").css("display", "block");
+  var calendar = new FullCalendar.Calendar(calendarEl, {
+    plugins: [ 'dayGrid', 'interaction' ],
+    events: 'http://localhost/inc/func/eventos.php',
+    eventClick:function(info){
+      options = {weekday: 'long', month: 'long', day: 'numeric' };
+      let inicio = new Date(info.event.start);
+      texto = 'Incia: ' + inicio.toLocaleDateString("es-ES", options)  + ' Descripcion: '+ info.event.extendedProps.description;
+      Swal.fire({
+        icon: 'info',
+        title: info.event.title,
+        text: texto,
+        footer: '<a href>Why do I have this issue?</a>'
+      })
+    }
+  });
+
+  calendar.setOption('locale','Es');
+  calendar.render(); 
+});</script>
+
+<?php
+}else{
+?>
+  <script>
   var myVar;
 
   function myFunction() {
@@ -48,22 +86,18 @@ $_SESSION['sr'] = "http://localhost/";
     document.getElementById("myDiv").style.display = "block";
   }
 
-</script>
+ $(document).ready(myFunction);
 
-<body onload="myFunction()" id="miDiv">
+</script>
+<?php
+}
+?>
+</head>
+<body id="miDiv">
 
 <header>
   <nav class="navbar navbar-expand-lg navbar-light bg-light">
     <a class="navbar-brand" href="<?php echo $_SESSION['sr'] ?>Home/"><img src="<?php echo $_SESSION['sr'] ?>img/icon2.png" alt="logo TIFERET"> </a>
-
-    <!--div-- class="d-none d-md-block mx-auto">
-      <ul class="navbar-nav ">
-        <li class="nav-item"><a class="nav-link" href="?a=Home">Home</a></li>
-        <li class="nav-item"><a class="nav-link" href="?a=proyecto">Nuestro Proyecto</a></li>
-        <li class="nav-item"><a class="nav-link" href="">Fundaciones de Apoyo</a></li>
-      </ul>
-    </!--div-->
-
   </nav>
 </header>
 <div class="loader" style="display:block;" id="loader" ></div>

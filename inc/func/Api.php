@@ -50,6 +50,19 @@ class BD {
     $this->dbClose();
   }
 
+  function Eventos(){
+    $this->cnx();
+    try{
+      $this->consulta = $this->conn->prepare("SELECT * FROM eventos");
+      $this->consulta->execute();
+      $this->respuesta = $this->consulta->fetchAll(PDO::FETCH_ASSOC);
+        echo json_encode($this->respuesta);
+      } catch (Exception $e) {
+      echo "Error al realizar la consulta";   
+    }
+    $this->dbClose();
+  }
+
   function mParasha(){
     $this->cnx();
     $this->respuesta=NULL;

@@ -5,6 +5,9 @@ if($_SESSION['user']){
   }else{
     $a = ($_GET['a']);
     switch(true){
+      case ($a=="eventos"):
+        $contenido = "eventos.php";
+      break;
       case ($a=="articulos"):
         $contenido = "AddArticulo.php";
       break;
