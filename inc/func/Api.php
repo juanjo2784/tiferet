@@ -53,7 +53,7 @@ class BD {
   function Eventos(){
     $this->cnx();
     try{
-      $this->consulta = $this->conn->prepare("SELECT * FROM eventos");
+      $this->consulta = $this->conn->prepare("SELECT title, inicio as start, fin as end, textColor, backgroundColor, dir FROM eventos");
       $this->consulta->execute();
       $this->respuesta = $this->consulta->fetchAll(PDO::FETCH_ASSOC);
         echo json_encode($this->respuesta);

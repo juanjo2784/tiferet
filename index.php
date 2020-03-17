@@ -54,10 +54,12 @@ let texto;
   var calendar = new FullCalendar.Calendar(calendarEl, {
     plugins: [ 'dayGrid', 'interaction' ],
     events: 'http://localhost/inc/func/eventos.php',
+    color: "#FF0F0",
+    textColor: "#FFFFFF",
     eventClick:function(info){
       options = {weekday: 'long', month: 'long', day: 'numeric' };
       let inicio = new Date(info.event.start);
-      texto = 'Incia: ' + inicio.toLocaleDateString("es-ES", options)  + ' Descripcion: '+ info.event.extendedProps.description;
+      texto = 'Incia: ' + inicio.toLocaleDateString("es-ES", options)  + ' Dirección: '+ info.event.extendedProps.dir;
       Swal.fire({
         icon: 'info',
         title: info.event.title,
