@@ -33,7 +33,7 @@ $_SESSION['sr'] = "http://localhost/";
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
   <script src="<?php echo $_SESSION['sr'] ?>inc/validar.js"></script>
 <?php 
-$evento = (isset($_GET['a']))?explode("/", $_GET['a']):"";
+$evento = (isset($_GET['a']))?explode("/", $_GET['a']):"Home";
 if ($evento[0] == "eventos"){
   ?>
 <link href='../calendario/core/main.css' rel='stylesheet' />
@@ -59,13 +59,31 @@ let texto;
     eventClick:function(info){
       options = {weekday: 'long', month: 'long', day: 'numeric' };
       let inicio = new Date(info.event.start);
-      texto = 'Incia: ' + inicio.toLocaleDateString("es-ES", options)  + ' Dirección: '+ info.event.extendedProps.dir;
+      datetime = new Date(info.event.start);
+      day = (datetime.getDate()<10)?"0"+datetime.getDate():datetime.getDate();
+      month =((datetime.getMonth() + 1)<10)?"0"+(datetime.getMonth() + 1):datetime.getMonth() + 1; //month: 0-11
+      year = datetime.getFullYear();
+      date = year + "-" + month + "-" + day;
+      hours = (datetime.getHours()<10)?"0"+datetime.getHours():datetime.getHours();
+      minutes =(datetime.getMinutes()<10)?"0"+datetime.getMinutes():datetime.getMinutes();
+      time = hours + ":" + minutes + ":00";
       Swal.fire({
-        icon: 'info',
-        title: info.event.title,
-        text: texto,
-        footer: '<a href>Why do I have this issue?</a>'
-      })
+          title: info.event.title,
+          icon: 'info',
+          html:
+          '<div class = "container">'+
+            '<div class="form-group row">'+
+            '<label for="date" class="col-4 col-form-label">Fecha</label><input type="date" class="form-control col-8 float-left" id="date" name="inicio" value="'+date+'" disabled>'+
+              '<label for="start" class="col-4 col-form-label">Inicia</label><input type="time" class="form-control col-8 float-left" id="start" name="inicio" value="'+time+'" disabled>'+
+            '</div>'+
+            '<div class="form-group row">'+
+              '<label for="dir" class="col-4 col-form-label">Dirección</label><label for="dir" class="col-4 col-form-label">'+info.event.extendedProps.dir+'</label>'+
+            '</div>'+
+          '</div>',
+          showCloseButton: true,
+          focusConfirm: false,
+          confirmButtonText: 'OK',
+        })
     }
   });
 

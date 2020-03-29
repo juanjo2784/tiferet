@@ -84,9 +84,13 @@
   color:  rgba(122, 119, 119, 0.7)
 }
 
+.color0{
+  background-color: transparent !important;
+}
 .cfi4 {
   color: #8DD13E;
 }
+
 
 a {
   color: #AD1A53;
@@ -167,10 +171,6 @@ body {
 
 img{
   max-width: 100%;
-}
-
-.img{
-  width: 100%;
 }
 
 .tlink {
@@ -578,7 +578,6 @@ ul{
 }
 
 .modal-content {
-  background-color: transparent !important;
   padding: 10px;
   border: none;
 }
@@ -603,6 +602,11 @@ ul{
 
 .img-galeria{
   padding: 12px;
+}
+
+#img2{
+  max-width: 90%;
+  margin:auto; 
 }
 
 .lbnt{

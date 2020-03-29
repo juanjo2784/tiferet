@@ -24,10 +24,19 @@ class Evento {
     }
   }
 
+  function addFile($ruta, $tmp_name){
+    try{
+     move_uploaded_file($ruta, $tmp_name);
+     $_SESSION['msg']=6;
+    }catch(Exception $e){
+     $_SESSION['msg']=7;
+    }
+  }
+
   function Eventos(){
     $this->cnx();
     try{
-      $this->consulta = $this->conn->prepare("SELECT title, inicio as start, textColor, backgroundColor, dir, id FROM eventos");
+      $this->consulta = $this->conn->prepare("SELECT title, inicio as start, textColor, backgroundColor, dir, id, img, audio FROM eventos");
       $this->consulta->execute();
       $this->respuesta = $this->consulta->fetchAll(PDO::FETCH_ASSOC);
         echo json_encode($this->respuesta);
@@ -42,39 +51,32 @@ class Evento {
     $this->consulta = NULL;
   }
 
-  function AddEvento($json){
+  function AddEvento($title, $inicio, $color, $fondo, $dir, $img){
     $this->cnx();
-    $title=$json[0];
-    $inicio=$json[1];
-    $color=$json[2];
-    $fondo=$json[3];
-    $dir=$json[4];
-    $id = $json[5];
-    try{
-      $this->consulta = $this->conn->prepare("INSERT INTO eventos (title, inicio, backgroundColor, textColor, dir) VALUES ($title,$inicio,$fondo, $color, $dir)");
-      $this->consulta->execute();
-    } catch(PDOException $e){
-      echo "Errores al guardar el registro";
-    }
-    $this->dbClose();
+      $this->consulta = $this->conn->prepare("INSERT INTO eventos (title, inicio, backgroundColor, textColor, dir, img) VALUES (:title, :inicio, :backgroundColor, :textColor, :dir, :img)");
+      $this->consulta->execute(array(":title"=>$title, ":inicio" => $inicio, ":backgroundColor"=>$fondo, ":textColor"=>$color, ":dir"=>$dir,":img"=> $img));
+      $this->dbClose();
   }
 
-  function upEvento($json){
+  function upEvento($id, $title, $inicio, $color, $fondo, $dir, $img, $audio){
     $this->cnx();
-    $title=$json[0];
-    $inicio=$json[1];
-    $color=$json[2];
-    $fondo=$json[3];
-    $dir=$json[4];
-    $id = $json[5];
+    echo "UPDATE eventos set $id, $title, $inicio, $color, $fondo, $dir, $img, $audio";
+      $this->consulta = $this->conn->prepare("UPDATE eventos set title = $title, inicio = $inicio, textColor = $color, backgroundColor = $fondo, dir = $dir, img = $img, audio = $audio WHERE id=$id");
+      $this->consulta->execute();
+  $this->dbClose();
+  }
+
+  function delEvento($id){
+    $this->cnx();
     try{
-      $this->consulta = $this->conn->prepare("UPDATE eventos set title = :title, inicio = :inicio, color = :color, fondo = :fondo, dir = :dir WHERE (id= :id)");
-      $this->consulta->execute(array(":title"=>$title, ":inicio"=>$inicio, ":color"=>$color, ":fondo"=>$fondo, ":dir"=>$dir, ":id"=>$id));
+      $this->consulta = $this->conn->prepare("DELETE FROM eventos WHERE (id=$id)");
+      $this->consulta->execute();
     } catch (Exception $e){
-      echo "Error al actualizar";
+      echo "Error al eliminar";
     }
   $this->dbClose();
   }
+
 
  }
 ?>

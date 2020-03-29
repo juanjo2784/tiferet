@@ -53,7 +53,7 @@ class BD {
   function Eventos(){
     $this->cnx();
     try{
-      $this->consulta = $this->conn->prepare("SELECT title, inicio as start, fin as end, textColor, backgroundColor, dir FROM eventos");
+      $this->consulta = $this->conn->prepare("SELECT title, inicio as start, textColor, backgroundColor, dir FROM eventos");
       $this->consulta->execute();
       $this->respuesta = $this->consulta->fetchAll(PDO::FETCH_ASSOC);
         echo json_encode($this->respuesta);
@@ -179,7 +179,7 @@ class BD {
         </div></a>
     </div>
       <div class='modal fade' id="myModal<?php echo $value['idarchivo'] ?>"  tabindex='5' role='dialog' >
-          <div class='modal-dialog modal-lg'><div class='modal-content'><center><?php $this->gSrc($value['nombre'],$tipo,$value['idarchivo']) ?></center></div>           
+          <div class='modal-dialog modal-lg'><div class='modal-content color0'><center><?php $this->gSrc($value['nombre'],$tipo,$value['idarchivo']) ?></center></div>           
         </div>
       </div>
     <?php  
@@ -215,7 +215,7 @@ class BD {
         <div class='modal fade' id="myModal<?php echo $value['idvideo']; ?>"  tabindex='5' role='dialog' >
           <div class='modal-dialog modal-lg'><div class='modal-content'><center><a type='button' class='close2' data-dismiss='modal' onclick="$(function() {$('#vy<?php echo $value['idvideo'];?>').children('iframe').attr('src', '');});"><i class='large material-icons md15'>close</i></a><div class='cv' id="vy<?php echo $value['idvideo'];?>" >
           <iframe frameborder="0" allow="accelerometer; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-          </div></center></div>           
+          </div></center></div>
         </div>
       </div>
     <?php  

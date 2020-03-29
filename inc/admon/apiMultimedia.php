@@ -78,6 +78,15 @@ class Multimedia {
   
  }
 
+ function addFile($ruta, $tmp_name){
+   try{
+    move_uploaded_file($tmp_name,$ruta);
+    $_SESSION['msg']=6;
+   }catch(Exception $e){
+    $_SESSION['msg']=7;
+   }
+ }
+
  function Mfile($nfile, $titulo, $descripcion, $categoria, $tipo, $direccion, $ntf){
   $ruta = '../../upload/'.$nfile;
   move_uploaded_file($ntf,$ruta);
