@@ -1,6 +1,6 @@
 <?php 
-require_once('Api.php');
-//archivo de parasha del listado
+include_once("Api.php");
+
 $evento = new BD();
 $evento->Eventos();
 ?>

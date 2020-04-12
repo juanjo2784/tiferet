@@ -2,7 +2,7 @@
 
 	<div class="clearfix col-md-4 d-none d-md-block">
 		<div class="parasha">
-			<img class="img-fluid mx-auto d-block" src="<?php echo $_SESSION['sr'] ?>img/Logo.png" alt="logo TIFERET">
+			<img class="img-fluid mx-auto d-block" src="<?php echo $ruta ?>img/Logo.png" alt="logo TIFERET">
       <div class="container pt-3">
       <h3>Nuestro Proyecto</h3>
       <h5>¿Quiénes Somos?</h5>

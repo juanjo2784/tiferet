@@ -127,7 +127,7 @@ if(isset($_SESSION['result'])){
     <input type="hidden" class="form-control" name="id" value="<?php $article->gId();?>">
 
     <div class="form-group row d-flex justify-content-between">
-    <a class="lbnt btn btn-danger btn-lg" href="?p=<?php $article->gId();?>&a=delArticulo">Eliminar Articulo</a>
+    <a class="lbnt btn btn-danger btn-lg" href="?p=<?php $article->gId();?>&a=delArticulo&n=<?php $article->gNimg();?>">Eliminar Articulo</a>
         <button type="submit" class="btn btn-primary btn-lg">Actualzar Articulo</button>
     </div>
   </form>

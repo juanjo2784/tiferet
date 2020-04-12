@@ -113,16 +113,18 @@ function itipo($a){
   <!--Mostrar contenido multimedia-->
 <div>
  <?php 
- $src="/../../upload/".$article->gNombre();
  switch($article->gTipo()){
    case 1:
+    $src="/../../upload/Imagenes/".$article->gNombre();
       echo "<center><img src=".$src." height='240'></center>";
    break;
    case 3:
+    $src="/../../upload/Videos/".$article->gNombre();
     echo "<center><video src=".$src." width='320' height='240' controls preload='auto'>Tu navegador no soporta MP4.</video></center>";
    break;
    
    case 2:
+    $src="/../../upload/Audio/".$article->gNombre();
     echo "<center><audio src=".$src." controls autoplay>Tu navegador no Soporta MP3.</audio></center>";
    break;
  };

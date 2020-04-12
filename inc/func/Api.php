@@ -1,10 +1,8 @@
 <?php
-error_reporting(0);
-class BD {
-  private static $user;
-  private static $password;
-  private static $host;
-  private $conn;
+include_once("conexion.php");
+
+//error_reporting(0);
+class BD extends CNX {
   private $consulta;
   private $respuesta = [];
   private $titulo;
@@ -13,36 +11,22 @@ class BD {
   private $tcr;
   private $pb;
   private $nimg;
-  
-
-  public function __construct() {
-    self::$user = 'admin';
-    self::$password = 3125480765;
-    self::$host = "mysql:host=localhost;dbname=bdtiferet";
-  }
+  private $fecha;
+  private $autor;
 
 //Metods
-  function cnx(){
-    try {
-      $this->conn = new PDO(self::$host,self::$user,self::$password);
-      $this->conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_SILENT);
-    } catch (Exception $e) {
-      echo "Error al conectar con la App ".$e ;       
-    }
-  }
-
   function ListadoArticulos($tipo){
-    $this->cnx();
+    $conn= $this->cnx();
     try{
-      $this->consulta = $this->conn->prepare("select titulo, idArticulos from articulos where tipo = $tipo");
-      $this->consulta->execute();
+      $this->consulta = $conn->prepare("select titulo, idArticulos from articulos where tipo = :tipo");
+      $this->consulta->execute(array(':tipo'=>$tipo));
       $this->respuesta = $this->consulta->fetchAll();
       echo '<ul>';
       foreach ($this->respuesta as $value){
         echo '<li style="padding: 5px 0 5px 0;"><a href="'.(int)$value['idArticulos'].'">'.$value['titulo'].'</a></li>';
       }
       echo '</ul>';
-      $this->pb = $value['idArticulos'];
+      //$this->pb = $value['idArticulos'];
       //  echo $this->gPb();
       } catch (Exception $e) {
       echo "Error al realizar la consulta";   
@@ -51,9 +35,9 @@ class BD {
   }
 
   function Eventos(){
-    $this->cnx();
+    $conn= $this->cnx();
     try{
-      $this->consulta = $this->conn->prepare("SELECT title, inicio as start, textColor, backgroundColor, dir FROM eventos");
+      $this->consulta = $conn->prepare("SELECT title, inicio as start, textColor, backgroundColor, dir, img, audio FROM eventos");
       $this->consulta->execute();
       $this->respuesta = $this->consulta->fetchAll(PDO::FETCH_ASSOC);
         echo json_encode($this->respuesta);
@@ -64,12 +48,11 @@ class BD {
   }
 
   function mParasha(){
-    $this->cnx();
     $this->respuesta=NULL;
-    $item = $_COOKIE['item'];
+    $conn = $this->cnx();
     try{
-      $this->consulta = $this->conn->prepare("select contenido, titulo, subtitulo, autor, fecha, tcr, nimg from articulos where titulo = '$item'");
-      $this->consulta->execute();
+      $this->consulta = $conn->prepare("select contenido, titulo, subtitulo, autor, fecha, tcr, nimg from articulos where titulo = :item");
+      $this->consulta->execute(array(':item'=>$_COOKIE['item']));
       $this->respuesta = $this->consulta->fetchAll(PDO::FETCH_ASSOC); 
       if ($this->respuesta){
         foreach($this->respuesta as $valor){
@@ -85,15 +68,15 @@ class BD {
         throw new Exception("Estamos trabajando para mantener nuestros contenidos actualizados");
       }
     } catch (Exception $e) {
-      echo 'Aun no se ha registrado información: ', $e->getMessage(), "\n";
+      echo 'Aun no se ha actualizado información de la Parasha haShavua: ', $e->getMessage(), "\n";
     }
     $this->dbClose();
   }
 
   function bArticulo($p){
-    $this->cnx();
-    $this->consulta = $this->conn->prepare("SELECT contenido, titulo, subtitulo, autor, fecha, tcr, nimg FROM articulos WHERE idArticulos = $p");
-    $this->consulta->execute();
+    $conn= $this->cnx();
+    $this->consulta = $conn->prepare("SELECT contenido, titulo, subtitulo, autor, fecha, tcr, nimg FROM articulos WHERE idArticulos = :id");
+    $this->consulta->execute(array(':id'=>$p));
     $this->respuesta = $this->consulta->fetchAll(PDO::FETCH_ASSOC);
     foreach($this->respuesta as $valor){
       $this->titulo = $valor['titulo'];
@@ -108,17 +91,17 @@ class BD {
   }
 
   function gImagenes($a){
-    $this->cnx();
-    $this->consulta = $this->conn->prepare("SELECT nombre, idarchivo FROM multimedia WHERE categoria = $a AND tipo = 1");
-    $this->consulta->execute();
+    $conn= $this->cnx();
+    $this->consulta = $conn->prepare("SELECT nombre, idarchivo FROM multimedia WHERE categoria = :categoria AND tipo = 1");
+    $this->consulta->execute(array(':categoria'=>$a));
     $this->respuesta = $this->consulta->fetchAll(PDO::FETCH_ASSOC);
     $k=0;
     $j=count($this->respuesta);
       foreach($this->respuesta as $value){
       ?>
     <div class="col-lg-3 col-md-4 col-xs-6 thumb">
-        <a href='/upload/<?php echo $value['nombre']?>' class="fancybox" rel="ligthbox">
-            <img  src='/upload/<?php echo $value['nombre']?>' class="zoom img-fluid "  alt="">
+        <a href='/upload/Imagenes/<?php echo $value['nombre']?>' class="fancybox" rel="ligthbox">
+            <img  src='/upload/Imagenes/<?php echo $value['nombre']?>' class="zoom img-fluid "  alt="">
         </a>
     </div>
     
@@ -129,17 +112,19 @@ class BD {
 
 
   function gSrc($name, $tipo, $id){
-    $src="/../../upload/".$name;
     switch($tipo){
       case 1:
+        $src="/../../upload/Imagenes/".$name;
          $mostrar = "<button type='button' class='close' data-dismiss='modal' aria-label='Close'><i class='large material-icons'>close</i></button><img src=".$src." class='img-fluid rounded'  >";
       break;
       case 3:
+        $src="/../../upload/Videos/".$name;
         $mostrar = "<a type='button' class='close2' data-dismiss='modal' onclick='document.getElementById(\"archivo".$id."\").pause();'><i class='large material-icons md15'>close</i></a><div class='cv'><video id='archivo".$id."' src=".$src." width='100%' preload='auto' controls controlslist='nodownload'>Tu navegador no soporta MP4.</video></div>";
         $this->icono = "local_movies";
       break;
       
       case 2:
+        $src="/../../upload/Audio/".$name;
         $mostrar = "<a type='button' class='close2' data-dismiss='modal' onclick='document.getElementById(\"archivo".$id."\").pause();'><i class='large material-icons md15'>close</i></a><div class='cv'><audio id='archivo".$id."' src=".$src." preload='auto' controls controlslist='nodownload'>Tu navegador no Soporta MP3.</audio></div>";
         $this->icono = "music_video";
       break;
@@ -147,22 +132,10 @@ class BD {
     echo $mostrar;
   }
 
-  function gIcono($a){
-    switch($a){
-      case 3:
-        $icono = "local_movies";
-      break;
-      case 2:
-        $icono = "music_video";
-      break;
-    } 
-    return $icono;
-  }
-
-  function gMultimedia($categoria, $tipo){
-    $this->cnx();
-    $this->consulta = $this->conn->prepare("SELECT nombre, titulo, idarchivo FROM multimedia WHERE categoria = $categoria AND tipo = $tipo");
-    $this->consulta->execute();
+   function gMultimedia($categoria, $tipo){
+    $conn = $this->cnx();
+    $this->consulta = $conn->prepare("SELECT nombre, titulo, idarchivo FROM multimedia WHERE categoria = :categoria AND tipo = :tipo");
+    $this->consulta->execute(array(':categoria'=>$categoria, ':tipo'=>$tipo));
     $this->respuesta = $this->consulta->fetchAll(PDO::FETCH_ASSOC);
     $k=0;
     $j=count($this->respuesta);
@@ -194,9 +167,9 @@ class BD {
   }
 
   function gYoutube($categoria){
-    $this->cnx();
-    $this->consulta = $this->conn->prepare("SELECT titulo, idvideo, vurl FROM youtube WHERE tipo = $categoria");
-    $this->consulta->execute();
+    $conn = $this->cnx();
+    $this->consulta = $conn->prepare("SELECT titulo, idvideo, vurl FROM youtube WHERE tipo = :categoria");
+    $this->consulta->execute(array(':categoria'=>$categoria));
     $this->respuesta = $this->consulta->fetchAll(PDO::FETCH_ASSOC);
     $k=0;
     $j=count($this->respuesta);
@@ -259,15 +232,28 @@ class BD {
 
   function gImg(){
     if($this->nimg<>""){
-      echo "<img src='../../upload/$this->nimg' style='width:100%; padding:0;'>";
+      echo "<img src='../../upload/Imagenes/$this->nimg' style='width:100%; padding:0;'>";
     }else{
       echo "";
     }
     
    }
 
+   function gIcono($a){
+    switch($a){
+      case 3:
+        $icono = "local_movies";
+      break;
+      case 2:
+        $icono = "music_video";
+      break;
+    } 
+    return $icono;
+  }
+
   function dbClose(){
-    $this->conn = NULL;
+    $conn= $this->cnx();
+    $conn = NULL;
     $this->consulta = NULL;
   }
 

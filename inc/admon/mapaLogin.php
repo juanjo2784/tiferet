@@ -43,6 +43,9 @@ if($_SESSION['user']){
           case 2:
             $contenido = "adminMultimedia.php";
           break;
+          case 3:
+            $contenido = "adminvideo.php";
+          break;
           }
         
       break;

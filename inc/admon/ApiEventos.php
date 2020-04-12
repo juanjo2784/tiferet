@@ -18,7 +18,7 @@ class Evento {
   function cnx(){
     try {
       $this->conn = new PDO(self::$host,self::$user,self::$password);
-      $this->conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_SILENT);
+      $this->conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
     } catch (Exception $e) {
       echo "Error al conectar con la App";       
     }
@@ -59,11 +59,21 @@ class Evento {
   }
 
   function upEvento($id, $title, $inicio, $color, $fondo, $dir, $img, $audio){
+    $inicio='\''.$inicio.'\'';
+    $img='\''.$img.'\'';
+    $audio='\''.$audio.'\'';
+    $color='\''.$color.'\'';
+    $fondo='\''.$fondo.'\'';
+    echo "imagen ".$img." auido: ".$audio;
     $this->cnx();
-    echo "UPDATE eventos set $id, $title, $inicio, $color, $fondo, $dir, $img, $audio";
-      $this->consulta = $this->conn->prepare("UPDATE eventos set title = $title, inicio = $inicio, textColor = $color, backgroundColor = $fondo, dir = $dir, img = $img, audio = $audio WHERE id=$id");
-      $this->consulta->execute();
-  $this->dbClose();
+    try{
+      $this->consulta = $this->conn->prepare("UPDATE eventos set title=:title, inicio=$inicio, textColor=$color, backgroundColor=$fondo, dir=:dir, img=$img, audio=$audio  WHERE (id=$id)");
+      $this->consulta->execute(array(":title"=>$title, ":dir"=>$dir));
+    }catch(Exception $e){
+      echo "Error en la consulta: ".$e;
+    }finally{
+      $this->dbClose();
+    }
   }
 
   function delEvento($id){

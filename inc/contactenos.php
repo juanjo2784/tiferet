@@ -12,22 +12,35 @@
             <form action="inc/enviar.php" onsubmit="return validar();" method="post" id="contact-form">
               <fieldset>
                 <legend>CONTACTANOS</legend>
-                <label for="Nombre">Nombre</label>
-                <input type="text" id="Nombre" tabindex="8" name="nombre" class="form-control" placeholder="Nombre" >
-                <label for="Telefono">Telefono</label>
-                <input type="text" id="Telefono" tabindex="9" name="telefono" class="form-control" placeholder="Móvil o celular" >
-                <label for="Correo">Correo</label>
-                <input type="text" id="Correo" tabindex="10" name="correo" class="form-control" placeholder="E-mail" >
-                <label for="Asunto">Asunto</label>
-                <input type="text" id="Asunto" tabindex="11" name="asunto" class="form-control" placeholder="Asunto" >
-                <label for="Mensaje">Mensaje</label>
-                <textarea id="Mensaje" tabindex="12" name="mensaje" class="form-control" placeholder="Por favor escriba el mensaje" rows="4"></textarea><br/>
+                <div class="form-group">
+                  <input type="text" id="Nombre" tabindex="8" name="nombre" class="form-control" placeholder="Nombre" >
+                </div>
+                
+                <div class="form-group">
+                  <input type="text" id="Telefono" tabindex="9" name="telefono" class="form-control" placeholder="Móvil o celular" >
+                </div>
+
+                <div class="form-group">
+                  <input type="text" id="Correo" tabindex="10" name="correo" class="form-control" placeholder="E-mail" >
+                </div>
+
+                <div class="form-group">
+                  <input type="text" id="Asunto" tabindex="11" name="asunto" class="form-control" placeholder="Asunto" >
+                </div>
+
+                <div class="form-group">
+                <textarea id="Mensaje" tabindex="12" name="mensaje" class="form-control" placeholder="Por favor escriba el mensaje" rows="4"></textarea>
+                </div>
+                
+                <div class="form-group">
                 <input id="mailf" name="mailf" type="hidden" value="<?php echo $mailf;?>">
+                </div>                
+
                 <button type="submit" class="btn btn-<?php echo $cboton; ?> d-flex ml-auto" id="btnenviar" title="Botón para enviar Informacion de contacto" tabindex="13">Enviar</button>
               </fieldset>
               <?php 
                     if (isset($_GET['p'])==1) {
-                      echo "<h5>Gracias por escribirnos, envio exitoso!!<h5>";
+                      echo "<h5>Gracias por escribirnos, el correo se envió exitosamente!!<h5>";
                     }
               ?>
             </form>

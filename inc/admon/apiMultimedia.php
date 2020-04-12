@@ -62,16 +62,18 @@ class Multimedia {
  }
 
  function gSrc($a){
-    $this->src="/../../upload/".$article->gNombre();
     switch($article->gTipo()){
       case 1:
+        $this->src="/../../upload/Imagenes/".$article->gNombre();
          echo "<center><img src=".$this->src."></center>";
       break;
       case 3:
+        $this->src="/../../upload/Videos/".$article->gNombre();
        echo "<center><video src=".$this->src." width='640' height='480' controls preload='auto'>Tu navegador no soporta MP4.</video></center>";
       break;
       
       case 2:
+        $this->src="/../../upload/Audio/".$article->gNombre();
        echo "<center><audio src=".$this->src."  preload='auto' controls>Tu navegador no Soporta MP3.</audio></center>";
       break;
     };
@@ -88,7 +90,18 @@ class Multimedia {
  }
 
  function Mfile($nfile, $titulo, $descripcion, $categoria, $tipo, $direccion, $ntf){
-  $ruta = '../../upload/'.$nfile;
+  switch($tipo){
+    case 1:
+      $ruta = '../../upload/Imagenes/'.$nfile;
+    break;
+    case 2:
+      $ruta = '../../upload/Audio/'.$nfile;
+    break;
+    case 3:
+      $ruta = '../../upload/Video/'.$nfile;
+    break;
+  }
+  
   move_uploaded_file($ntf,$ruta);
   $this->cnx();
   $this->consulta = $this->conn->prepare("INSERT INTO multimedia (nombre, titulo, descripcion, categoria, tipo, dir) values(:nombre,:titulo,:descripcion,:categoria,:tipo, :direccion)");
@@ -125,7 +138,7 @@ function Listado($tipo, $categoria){
     $this->respuesta = $this->consulta->fetchAll();
     echo '<ul class="tlink">';
     foreach ($this->respuesta as $value){
-      echo '<li><a href="?c=2&a='.(int)$value['idarchivo'].'">'.$value['nombre'].'</a></li>';
+      echo '<li><a href="?c=2&a='.(int)$value['idarchivo'].'&n='.$value['nombre'].'&t='.$tipo.'">'.$value['nombre'].'</a></li>';
     }
     echo '</ul>';
     $src="";

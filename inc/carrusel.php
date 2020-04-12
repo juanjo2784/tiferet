@@ -18,7 +18,7 @@
             <h3>¿Quiénes Somos?</h3>
               <p class="text-justify"> Tiferet es el centro de integración de la comunidad latinoamericana ortodoxa en Jerusalén.</p>
               <p class="text-justify">Busca conectar las diferentes fundaciones sin ánimo de lucro que trabajan en beneficio de la comunidad latinoamericana de esta ciudad, somos soporte para direccionar las solicitudes y demandas que la población latina religiosa de Jerusalén requiera para su absorción en Israel, direccionandoles a las diferentes fundaciones que existen para tal fin.</p>
-              <p class="text-right"><a href="<?php echo $_SESSION['sr'] ?>proyecto">leer mas ...</a></p>
+              <p class="text-right"><a href="<?php echo $ruta ?>proyecto">leer mas ...</a></p>
           </div>
 
           <div class="carousel-item">

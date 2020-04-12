@@ -57,7 +57,7 @@ $_SESSION['tipo']=1;
       </div>
       <div id="Audio" class="tab-contents">
         <h2>Audios</h2>
-        <?php $status->gYoutube($_SESSION['tipo'])?>
+        <?php $status->gMultimedia($_SESSION['tipo'],2)?>
       </div>
       <div id="Canal" class="tab-contents">
         <h2>Videos de Nuestro Canal</h2>
@@ -68,7 +68,7 @@ $_SESSION['tipo']=1;
     </div>
   </div>
 </div>
-
+</div>
 <script>
 $(function() {
   var $tabButtonItem = $('#tab-button li'),

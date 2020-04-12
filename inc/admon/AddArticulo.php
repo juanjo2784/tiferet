@@ -11,7 +11,7 @@ if($_POST){
   $fecha = $_POST['fecha'];
   $nimg = $_FILES['archivo']['name'];
   $ntf= $_FILES['archivo']['tmp_name'];
-  $ruta = '../../upload/'.$nimg;
+  $ruta = '../../upload/Imagenes/'.$nimg;
    move_uploaded_file($ntf,$ruta);
 
   $registro = new Admin;
@@ -26,6 +26,7 @@ if($_POST){
 }
 
 ?>
+<div class="container cartag">
 <form action="" method="post" enctype="multipart/form-data">
 <fieldset><legend class="text-center">Agregar un Articulo de Texto</legend>
 <div class="form-group row">
@@ -80,3 +81,4 @@ if($_POST){
 </div>
 </fieldset>
 </form>
+</div>

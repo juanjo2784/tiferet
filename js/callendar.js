@@ -1,4 +1,3 @@
-let texto;
   document.addEventListener('DOMContentLoaded', function(){
   var calendarEl = document.getElementById('calendar');
   $("#loader").css("display","none");
@@ -25,17 +24,30 @@ let texto;
       $('#fecha2').val(date);
       $('#start2').val(time);
       $('#textColor2').val(info.event.textColor);
-      if(info.event.extendedProps.img  === null){
-        $('#img2').hide();
-        $('#rfile').val("null");
+      if(info.event.extendedProps.img === null){
+        $('#img3').hide();
+        $('#limg').val("Agregar Imagen");
+        $('#fimg').val(null);
       }else{
-      $('#img2').show();
-      $('#img2').attr("src",info.event.extendedProps.img);
-      $('#rfile').val(info.event.extendedProps.img);
+        console.log();
+        $('#img3').show(info.event.extendedProps.img);
+        $('#img3').attr("src",info.event.extendedProps.img);
+        $('#limg').val("Cambiar Imagen");
+        $('#rutaimg').val(info.event.extendedProps.img);
+        $('#fimg').val(info.event.extendedProps.img);
       }
       $('#backgroundColor2').val(info.event.backgroundColor); 
       $('#idevento').val(info.event.id);
       $('#idevento2').val(info.event.id);
+      if(info.event.extendedProps.audio === null){
+        $('#eAudio').html('Agregar Audio');
+        $('#fauido').val(null);
+      }else{
+        console.log(info.event.extendedProps.audio);
+        $('#eAudio').html('Cambiar Audio');
+        $('#rutaudio').val(info.event.extendedProps.audio);
+        $('#faudio').val(info.event.extendedProps.audio);
+      }
       $('#upevento').modal();
     },
   });

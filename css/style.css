@@ -155,18 +155,9 @@ li.nav-item:hover .nav-link{
 }
 
 body {
-  /*background: url(/img/bgd.png) no-repeat center;
-  background-size: cover;
-  background-attachment: fixed;
-  /*background: #ecf6f8;*/
   display: flex;
   flex-direction: column;
 	background: radial-gradient(circle farthest-side at center, rgb(255, 247, 130), rgb(255, 255, 255));
-/*background-image: linear-gradient(
-      rgba(239, 254, 101, 0.3), 
-      rgba(239, 254, 101, 0.3)
-    ),
- url(/img/camp1.jpg);*/
 }
 
 img{
@@ -200,6 +191,18 @@ div .tlink a {
   -moz-box-shadow: -1px -6px 19px -10px rgba(0,0,0,0.75);
   box-shadow: -1px -6px 19px -10px rgba(0,0,0,0.75);
   z-index: 5;
+}
+
+a .carta {
+  height: 200px;
+}
+
+a .carta h4 {
+  font-size: 1.1rem;
+  margin-left: 2px;
+  padding: 2px;
+  font-weight: bold;
+  overflow: auto;
 }
 
 h3{
@@ -257,6 +260,7 @@ h3{
 
   .hsb{
     width: 30%;
+    min-height: 90%;
   }
 
   .trj{
@@ -275,8 +279,6 @@ h3{
   font-size: 12pt;
   margin-top: 15px;
   margin-bottom: 15px;
-  margin-left: 8px;
-  margin-right: 8px;
   -webkit-box-shadow: -1px -6px 19px -10px rgba(0,0,0,0.75);
   -moz-box-shadow: -1px -6px 19px -10px rgba(0,0,0,0.75);
   box-shadow: -1px -6px 19px -10px rgba(0,0,0,0.75);
@@ -607,6 +609,10 @@ ul{
 #img2{
   max-width: 90%;
   margin:auto; 
+}
+
+#cimg{
+  align-content: center;
 }
 
 .lbnt{

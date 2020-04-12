@@ -5,7 +5,7 @@ if(isset($_COOKIE['item'])){
 ?>  
   <div class = "row ficha d-flex flex-wrap">
     <div class="tg carta color5 flex-fill">
-       <a href="<?php echo $_SESSION['sr'] ?>Parashat/" tabindex="4">
+       <a href="<?php echo $ruta ?>Parashat/" tabindex="4">
         <div class="" id="sdc">
           <div class="card-encabezado text-center"><i class="material-icons md50 cfi7">local_parking</i></div>
             <div class="card-body">
@@ -16,7 +16,7 @@ if(isset($_COOKIE['item'])){
     </div>
 
     <div class="tg carta color5 flex-fill">
-    <a href="<?php echo $_SESSION['sr'] ?>eventos/" tabindex="4">
+    <a href="<?php echo $ruta ?>eventos/" tabindex="4">
       <div class="" id="sdc">
               <div class="card-encabezado text-center"><i class="material-icons md50 cfi7">today</i></div>
               <div class="card-body">
@@ -27,7 +27,7 @@ if(isset($_COOKIE['item'])){
     </div>
 
     <div class="tg carta color5 flex-fill">
-    <a href="<?php echo $_SESSION['sr'] ?>article/2/" tabindex="4">
+    <a href="<?php echo $ruta ?>article/2/" tabindex="4">
       <div class="" id="sdc">
               <div class="card-encabezado text-center"><i class="material-icons md50 cfi7">leak_add</i></div>
               <div class="card-body">
@@ -38,7 +38,7 @@ if(isset($_COOKIE['item'])){
     </div>
 
     <div class="tg carta color5 flex-fill">
-    <a href="<?php echo $_SESSION['sr'] ?>galeria/" tabindex="4">
+    <a href="<?php echo $ruta ?>galeria/" tabindex="4">
       <div class="" id="sdc">
         <div class="card-encabezado text-center"><i class="material-icons md50 cfi7">photo_camera</i></div>
         <div class="card-body">
@@ -49,7 +49,7 @@ if(isset($_COOKIE['item'])){
     </div>
 
     <div class="tg carta color5 flex-fill">
-    <a href="<?php echo $_SESSION['sr'] ?>recetas/4/" tabindex="4">
+    <a href="<?php echo $ruta ?>recetas/4/" tabindex="4">
       <div class="" id="sdc">
         <!--div-- class="card-encabezado text-center"><i class="material-icons md50 cfi7">golf_course</i></!--div-->
         <div class="card-encabezado text-center"><i class="material-icons md50 cfi7">restaurant_menu</i></div>
@@ -61,7 +61,7 @@ if(isset($_COOKIE['item'])){
     </div>
 
     <div class="tg carta color5 flex-fill">
-    <a href="<?php echo $_SESSION['sr'] ?>article/3/" tabindex="4">
+    <a href="<?php echo $ruta ?>article/3/" tabindex="4">
         <div class="" id="sdc">
           <div class="card-encabezado text-center"><i class="material-icons md50 cfi7">fitness_center</i></div>
             <div class="card-body">
@@ -76,7 +76,7 @@ if(isset($_COOKIE['item'])){
 
 <script>
   let contenido = document.getElementById('#contenido')  
-  fetch('https://www.hebcal.com/shabbat/?cfg=json&geonameid=281184&m=50&leyning=on')
+  fetch('https://www.hebcal.com/hebcal/?v=1&cfg=json&maj=on&min=on&mod=on&nx=on&year=now&month=x&ss=on&mf=on&c=on&geo=geoname&geonameid=281184&m=50&s=on&D=on&i=on')
   .then(res=>res.json()).then(data=> {
       for (let i = 1; i < data.items.length; i++){     
         if(data.items[i].category == "parashat"){
