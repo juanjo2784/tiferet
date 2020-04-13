@@ -1,5 +1,5 @@
 <?php 
-require_once('Api.php');
+require_once('config/tiferet/mtiferet.php');
 $imagen = new BD();
 $_SESSION['tipo']=6;?>
 

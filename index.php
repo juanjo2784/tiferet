@@ -1,6 +1,6 @@
 <?php 
 session_start();
-include_once("inc/config.php");
+include_once("config/config.php");
 ?>
 <!DOCTYPE html>
 
@@ -21,11 +21,10 @@ include_once("inc/config.php");
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-  <script src="<?php echo $ruta ?>inc/validar.js"></script>
 <?php 
 $evento = (isset($_GET['a']))?explode("/", $_GET['a']):"Home";
 if ($evento[0] == "eventos"){
- include_once("inc/fEvento.php");
+ include_once("pages/event/fEvento.php");
 }else{
 echo "<script src='/js/loader.js'></script>";
 }
@@ -42,15 +41,15 @@ echo "<script src='/js/loader.js'></script>";
 <div  class="pal container-fluid animate-bottom" style="display:none;" id="myDiv">
 
 <?php 
-  include_once ("inc/mapa.php"); 
+  include_once ("config/mapa.php"); 
   require $contenido; 
 ?>
   
 </div>
 
 <?php 
-  include_once ("inc/footer.php"); 
-  include_once ('inc/menu.php');
+  include_once ("component/footer.php"); 
+  include_once ('component/menu.php');
 ?>
 
 </body>

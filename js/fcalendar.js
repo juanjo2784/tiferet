@@ -4,7 +4,7 @@ $("#loader").css("display","none");
 $("#myDiv").css("display", "block");
 var calendar = new FullCalendar.Calendar(calendarEl, {
 plugins: [ 'dayGrid', 'interaction' ],
-events: 'http://localhost/inc/func/eventos.php',
+events: 'http://localhost/pages/event/eventos.php',
 color: "#FF0F0",
 textColor: "#FFFFFF",
 eventClick:function(info){

@@ -9,7 +9,7 @@
 
   <div class="card-body col-8">
   <div class="container  form-group frmEnviar">
-            <form action="inc/enviar.php" onsubmit="return validar();" method="post" id="contact-form">
+            <form action="../pages/correo/enviar.php" onsubmit="return validar();" method="post" id="contact-form">
               <fieldset>
                 <legend>CONTACTANOS</legend>
                 <div class="form-group">
@@ -49,3 +49,4 @@
 
   </div>
 </div>
+<script src="../../js/validar.js"></script>

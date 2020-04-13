@@ -68,7 +68,7 @@ if(isset($_COOKIE['item'])){
               <h3 class="text-center">Emuná y Bitajón</h3>
             </div>
           </div>
-        <div><?php include "inc/mpropuesta.php"?></div>
+        <div><?php include "pages/emuna.php"?></div>
       </a>
     </div>
 

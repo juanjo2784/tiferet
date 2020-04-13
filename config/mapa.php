@@ -1,35 +1,35 @@
 <?php
 if(!isset($_GET['a'])){
-  $contenido="inc/Home.php";
+  $contenido="component/Home.php";
 }else{
   $a = explode("/",$_GET['a']);
   switch (true) {
     case ($a[0] == "contacto" ):
-    $contenido="inc/contactenos.php";
+    $contenido="pages/contactenos.php";
   break;
     case ($a[0] == "Home"):
-    $contenido="inc/Home.php";
+    $contenido="component/Home.php";
   break;
     case ($a[0] == "proyecto"):
-    $contenido="inc/proyecto.php";
+    $contenido="pages/proyecto.php";
   break;
     case ($a[0] == "Parashat"):
-    $contenido = "inc/func/mparasha.php";
+    $contenido = "pages/mparasha.php";
     break;
   case ($a[0] == "galeria"):
-   $contenido="inc/func/galeria.php";
+   $contenido="pages/galeria.php";
   break;
   case ($a[0] == "juegos"):
-    $contenido="inc/func/sd.php";
+    $contenido="pages/sd.php";
    break;
    case ($a[0] == "eventos"):
-    $contenido="inc/func/cronograma.php";
+    $contenido="pages/event/cronograma.php";
    break;
     case ($a[0] == "article"):
-    $contenido="inc/func/bArticulo.php";
+    $contenido="pages/bArticulo.php";
   break;
   case ($a[0] <=99):
-    $contenido="inc/func/bArticulo.php";
+    $contenido="pages/bArticulo.php";
   break;
   }
 }
