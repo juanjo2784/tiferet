@@ -13,7 +13,7 @@ $_SESSION['tipo']=1;
 
     <div class="col-sx-11 col-md-2">
        <h5>Parashot</h5>
-       <?php $status ->ListadoArticulos($_SESSION['tipo']); $_SESSION['pb']=$status->gPb();?>
+       <?php $status ->ListadoArticulos($_SESSION['tipo']);?>
     </div>
 
     <div class="col-sx-11 col-md-9 cartag">
@@ -45,8 +45,10 @@ $_SESSION['tipo']=1;
         }
       ?>
       <div id="Articulo" class="tab-contents">
+      <center>
         <?php $status->gImg() ?>
-        <h4><?php $status->gTitulo() ?></h4>
+        <h3><?php $status->gTitulo() ?></h3>        
+      </center>
         <p class="text-left">Por: <?php $status -> gAutor();echo"<br/>fecha: ";$status->gFecha(); ?></p>
           <p><?php $status -> gContenido(); ?></p>
           <h6><?php $status -> gTcr(); ?></h6>

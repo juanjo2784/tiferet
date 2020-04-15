@@ -1,10 +1,7 @@
 <?php
-
-class Admin {
-  private static $user;
-  private static $password;
-  private static $host;
-  private $conn;
+//echo getcwd();
+include_once("conexion.php");
+class Articulo extends CNX {
   private $consulta;
   private $respuesta = [];
   public $titulo;
@@ -18,26 +15,10 @@ class Admin {
   public $tf; //tipo de archivo
   public $nfile;
 
-  public function __construct() {
-    self::$user = 'admin';
-    self::$password = 3125480765;
-    self::$host = "mysql:host=localhost;dbname=bdtiferet";
-  }
-
-//Metods
-  function cnx(){
-    try {
-      $this->conn = new PDO(self::$host,self::$user,self::$password);
-      $this->conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_SILENT);
-    } catch (Exception $e) {
-      echo "Error al conectar con la App";       
-    }
-  }
-
   function ListadoArticulos($tipo){
-    $this->cnx();
+    $conn = $this->cnx();
     try{
-      $this->consulta = $this->conn->prepare("select titulo, idArticulos from articulos where tipo = $tipo");
+      $this->consulta = $conn->prepare("select titulo, idArticulos from articulos where tipo = $tipo");
       $this->consulta->execute();
       $this->respuesta = $this->consulta->fetchAll();
       echo '<ul>';
@@ -52,9 +33,9 @@ class Admin {
   }
  
   public function AddArticulo($titulo, $subtitulo, $autor, $tipo,  $tcr, $contenido, $fecha, $nimg){
-    $this->cnx();
+    $conn = $this->cnx();
     try{
-      $this->consulta = $this->conn->prepare("INSERT INTO articulos (idArticulos,titulo, subtitulo, autor, tipo,  tcr, contenido, fecha, nimg) VALUES (null,:titulo,:subtitulo,:autor,:tipo,:contenido, :tcr, :fecha, :nimg)");
+      $this->consulta = $conn->prepare("INSERT INTO articulos (idArticulos,titulo, subtitulo, autor, tipo,  tcr, contenido, fecha, nimg) VALUES (null,:titulo,:subtitulo,:autor,:tipo,:contenido, :tcr, :fecha, :nimg)");
       $this->consulta->execute(array(":titulo"=>$titulo, ":subtitulo"=>$subtitulo, ":autor"=>$autor, ":tipo"=>$tipo, ":contenido"=>$contenido, ":tcr"=>$tcr, ":fecha"=>$fecha, ":nimg"=>$nimg));
     } catch(PDOException $e){
         echo "Errores al guardar el registro";
@@ -62,9 +43,9 @@ class Admin {
   }
   
   function BuscarArticulo($p){
-    $this->cnx();
+    $conn = $this->cnx();
       try{
-        $this->consulta = $this->conn->prepare("SELECT * FROM articulos WHERE idArticulos = $p");
+        $this->consulta = $conn->prepare("SELECT * FROM articulos WHERE idArticulos = $p");
         $this->consulta->execute();
         $this->respuesta = $this->consulta->fetchAll(PDO::FETCH_ASSOC);
           foreach($this->respuesta as $valor){
@@ -84,9 +65,9 @@ class Admin {
   }
 
   function UpdateArticulo($titulo,$subtitulo,$autor,$contenido,$tcr,$fecha,$p,$nimg){
-    $this->cnx();
+    $conn = $this->cnx();
     try{
-      $this->consulta = $this->conn->prepare("UPDATE articulos set titulo = :titulo, subtitulo = :subtitulo, autor = :autor, contenido = :contenido, tcr = :tcr, fecha = :fecha, nimg = :nimg WHERE (idArticulos= :id)");
+      $this->consulta = $conn->prepare("UPDATE articulos set titulo = :titulo, subtitulo = :subtitulo, autor = :autor, contenido = :contenido, tcr = :tcr, fecha = :fecha, nimg = :nimg WHERE (idArticulos= :id)");
       $this->consulta->execute(array(":titulo"=>$titulo, ":subtitulo"=>$subtitulo, ":autor"=>$autor, ":contenido"=>$contenido, ":tcr"=>$tcr, ":fecha"=>$fecha, "id"=>$p, ":nimg"=>$nimg));
     } catch (Exception $e){
       echo "Error al actualizar";
@@ -95,9 +76,9 @@ class Admin {
   }
 
   function DelArticulo($p){
-    $this->cnx();
+    $conn = $this->cnx();
     try{
-      $this->consulta = $this->conn->prepare("DELETE FROM articulos WHERE (idArticulos=$p)");
+      $this->consulta = $conn->prepare("DELETE FROM articulos WHERE (idArticulos=$p)");
       $this->consulta->execute();
     } catch (Exception $e){
       echo "Error al eliminar";
@@ -107,9 +88,9 @@ class Admin {
 
 
   function Eventos(){
-    $this->cnx();
+    $conn = $this->cnx();
     try{
-      $this->consulta = $this->conn->prepare("SELECT * FROM eventos");
+      $this->consulta = $conn->prepare("SELECT * FROM eventos");
       $this->consulta->execute();
       $this->respuesta = $this->consulta->fetchAll(PDO::FETCH_ASSOC);
         echo json_encode($this->respuesta);

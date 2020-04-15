@@ -1,5 +1,5 @@
 <?php 
-    require_once('ApiEventos.php');
+  include_once('Articulos/Model/mArticulo.php');
     $evento = new Evento(); 
 
   if($_POST){

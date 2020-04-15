@@ -35,7 +35,7 @@
       <a class="nav-link" href="<?php echo $ruta ?>article/5/" title="Link para acceso a Información sobre leyes de Tziniut"><span class="float-left">Tziniut</span></a>
     </li>
     <li>
-      <a class="nav-link" href="#problema" title="Link para acceso a Información sobre lugares recomendados para visitar"><span class="float-left">Lugares recomendados</span></a>
+      <a class="nav-link" href="<?php echo $ruta ?>article/6/" title="Link para acceso a Información sobre lugares recomendados para visitar"><span class="float-left">Lugares recomendados</span></a>
     </li>
     <li>
       <a class="nav-link" href="<?php echo $ruta ?>article/3/" title="Link para acceso a Información articulos de Emuna y Bitajon"><span class="float-left">Articulos de Emuna y Bitajon</span></a>

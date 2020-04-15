@@ -2,7 +2,7 @@
   <div class="row">
 
   <div class="col-4 d-none d-sm-none d-md-block card-encabezado text-center">
-    <i class="material-icons md50 cfm cfm">local_post_office</i>
+    <i class="material-icons md50 cfi7">local_post_office</i>
     <h3 class="text-center">Escríbenos</h3>
     <p class="text-justify">Nos puedes escribir a nuestro <a class="correo" href="mailto:<?php echo $mailf; ?>?&subject=Información%20adicional&body=Móvil:%0d%0aNombre:%0d%0a" title="Link de acceso para enviar correo electrónico" tabindex="14">e-mail</a>, también puedes llenar el formulario de CONTACTANOS y además puedes comunicarte con nuestro Representante <?php echo $representante; ?>, al número <a href="tel:<?php echo $telefono1; ?>" title="Telefono de contacto" tabindex="15"> (+972) <?php echo $telefono; ?></a>, estamos presto a contestar tus preguntas, ten presente que también puedes ser parte de la solución. </p>
   </div>

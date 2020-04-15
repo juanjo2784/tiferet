@@ -1,5 +1,5 @@
 <?php 
-include_once("apiMultimedia.php");
+include_once("Model/mMultimedia.php");
 
 $archivo = new Multimedia;
 
@@ -31,7 +31,6 @@ if($_FILES){
 
 <div class="container cartag">
   <form action="" method="post">
-
   <div class="form-group row">
      <h2 class="col-6">Agregar <?php 
      switch ($_POST['clase']){

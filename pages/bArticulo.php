@@ -30,8 +30,10 @@ switch($_SESSION['tipo']){
    case 5:
      $listado = "Tziniut";
    break;
+   case 6:
+    $listado = "Lugares";
+  break;
  }
-
 ?>
 
 <div class="container-fluid">
@@ -39,7 +41,7 @@ switch($_SESSION['tipo']){
 
     <div class="col-sx-11 col-md-2">
        <h5><?php echo $listado?></h5>
-       <?php $status ->ListadoArticulos($_SESSION['tipo']); $_SESSION['pb']=$status->gPb();?>
+       <?php $status ->ListadoArticulos($_SESSION['tipo']);?>
     </div>
 
     <div class="col-sx-11 col-md-9 cartag">
@@ -63,17 +65,20 @@ switch($_SESSION['tipo']){
       </div>
       <?php 
       $var = explode("/", $_GET['a']);
+      $id=(isset($var[2]))?$var[2]:1;
         if ($var[0]=="article"){
-          $pb = $_SESSION['pb'];
-          $status -> bArticulo($pb);
+          $status -> bArticulo($id);
         }else{
-        $status-> bArticulo($var[1]);
+          $status-> bArticulo($id);
         }
       ?>
       <div id="Articulo" class="tab-contents">
-        <h4><?php $status->gTitulo() ?></h4>
+        <center>
         <?php $status->gImg() ?>
+        <h3><?php $status->gTitulo() ?></h3>        
+        </center>
         <p class="text-left">Por: <?php $status -> gAutor();echo"<br/>fecha: ";$status->gFecha(); ?></p>
+        
           <p><?php $status -> gContenido(); ?></p>
           <h6><?php $status -> gTcr(); ?></h6>
       </div>

@@ -1,5 +1,6 @@
 <?php 
-include_once("ApiAdmin.php");
+//echo getcwd();
+include_once("Model/mArticulo.php");
 
 if($_POST){
   $titulo = $_POST['titulo'];
@@ -14,7 +15,7 @@ if($_POST){
   $ruta = '../../upload/Imagenes/'.$nimg;
    move_uploaded_file($ntf,$ruta);
 
-  $registro = new Admin;
+  $registro = new Articulo;
 
   try{
     $registro->AddArticulo($titulo, $subtitulo, $autor, $tipo, $contenido, $tcr, $fecha,$nimg);

@@ -1,9 +1,9 @@
-<link href='../../calendario/core/main.css' rel='stylesheet' />
-<link href='../../calendario/daygrid/main.css' rel='stylesheet' />
-<script src='../../calendario/core/main.js'></script>
-<script src='../../calendario/daygrid/main.js'></script>
-<script src='../../calendario/interaction/main.js'></script>
-<script src="callendar.js"></script>
+<link href='../../../pages/event/calendario/core/main.css' rel='stylesheet' />
+<link href='../../../pages/event/calendario/daygrid/main.css' rel='stylesheet' />
+<script src='../../../pages/event/calendario/core/main.js'></script>
+<script src='../../../pages/event/calendario/daygrid/main.js'></script>
+<script src='../../../pages/event/calendario/interaction/main.js'></script>
+<script src="../../../js/callendar.js"></script>
 
 <!-- The Modal NUEVO EVENTO -->
 <div class="modal fade" id="nevento">

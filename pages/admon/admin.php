@@ -2,7 +2,7 @@
   session_start();
   $_SESSION['sr'] = "http://localhost/";
   if(!isset($_SESSION['user'])){
-    header("location: login.php");
+    header("location:Pages/login.php");
   }
 ?>
 <!DOCTYPE html>
@@ -28,7 +28,7 @@
 <?php 
 $evento = (isset($_GET['a']))?explode("/", $_GET['a']):"articulos";
 if ($evento[0] == "eventos"){
-  include 'modalCalendar.php';
+  include 'Eventos/View/modalCalendar.php';
 }else{
   echo "<script src='loader.js'></script>";
 }
@@ -55,12 +55,11 @@ if ($evento[0] == "eventos"){
 <div  class="pal container-fluid">
 
 <?php 
-
-  require "mapaLogin.php"; 
-  require $contenido; 
+  require "Config/mapaLogin.php"; 
+  echo getcwd();
+  require $contenido;   
+  echo "</div>";
+  include_once ("Component/footer.php"); 
 ?>
-  
-</div>
-
 </body>
 </html>

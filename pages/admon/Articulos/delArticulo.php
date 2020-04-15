@@ -1,7 +1,7 @@
 <?php 
 session_start();
-include_once("ApiAdmin.php");
-$registro = new Admin;
+include_once("Articulos/Model/mArticulo.php");
+$registro = new Articulo;
 $ruta=(isset($_GET['n']))?"../../upload/Imagenes/".$_GET['n']:null;
 $id = $_GET['p'];
 try{

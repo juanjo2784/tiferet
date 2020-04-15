@@ -1,9 +1,6 @@
 <?php 
-class Multimedia {
-  private static $user;
-  private static $password;
-  private static $host;
-  private $conn;
+include_once("conexion.php");
+class Multimedia extends CNX {
   private $consulta;
   private $respuesta = [];
   public $titulo;
@@ -17,22 +14,6 @@ class Multimedia {
   public $id;
   public $ext;
   public $src;
-
-  public function __construct() {
-    self::$user = 'admin';
-    self::$password = 3125480765;
-    self::$host = "mysql:host=localhost;dbname=bdtiferet";
-  }
-
-//Metods
-  function cnx(){
-    try {
-      $this->conn = new PDO(self::$host,self::$user,self::$password);
-      $this->conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_SILENT);
-    } catch (Exception $e) {
-      echo "Error al conectar con la App";       
-    }
-  }
 
   function dbClose(){
     $this->conn = NULL;

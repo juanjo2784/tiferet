@@ -19,7 +19,7 @@ eventClick:function(info){
     time = hours + ":" + minutes;
     $('#titulo').html(info.event.title);
     $('#fecha').html("Fecha: " + date + " - Hora: " + time + " hrs");
-    if(info.event.extendedProps.img === null){
+    if(info.event.extendedProps.img === null ){
         $('#cimg').hide();
     }else{
         $('#cimg').show();
@@ -40,7 +40,6 @@ eventClick:function(info){
             $('#boton').val("play");
             document.getElementById('audio').pause();
         }else{
-
             $('#icono').html("pause")
             $('#boton').val("pausa");
             document.getElementById('audio').play();

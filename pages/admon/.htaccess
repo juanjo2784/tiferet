@@ -1,0 +1,7 @@
+Options +FollowSymLinks
+Options All -indexes
+RewriteEngine on
+
+RewriteRule ^([a-zA-Z0-9/]+)$     index.php?a=$1
+
+

@@ -1,6 +1,6 @@
 <?php 
 session_start();
-include_once("ApiAdmin.php");
+include_once("Articulos/Model/mArticulo.php");
 
   $titulo = $_POST['titulo'];
   $subtitulo = $_POST['subtitulo'];
@@ -12,18 +12,18 @@ include_once("ApiAdmin.php");
   $ruta = '../../upload/'.$_FILES['archivo']['name'];
   $ntf= $_FILES['archivo']['tmp_name'];
   $nimg = $_FILES['archivo']['name'];
-  print_r($_FILES['archivo']['tmp_name']);
-  //move_uploaded_file($ntf,$ruta);
-echo $nimg;
+  //print_r($_FILES['archivo']['tmp_name']);
+  //echo $nimg;
 
-  /*$registro = new Admin;
+  $registro = new Articulo;
 
   try{
     $registro->AddArticulo($titulo, $subtitulo, $autor, $tipo, $contenido, $tcr, $fecha,$nimg);
-    $_SESSION['result']=1;
+    move_uploaded_file($ntf,$ruta);
+    $_SESSION['msg']=1;
     header("location: indexAdmin.php?a=UpdateArticulo");
   } catch (Exception $e){
-      $_SESSION['result']=0;
-  }*/
+      $_SESSION['msg']=0;
+  }
 
 ?>

@@ -24,7 +24,7 @@
 <div  class="pal container-fluid">
 
 <div class="container pt-5">
-<form action="vlogin.php" method="POST">
+<form action="" method="POST">
   <fieldset>
   <center>
   <legend>Loggin Administrador Tiferet</legend></br>
@@ -43,3 +43,30 @@
 
 </body>
 </html>
+<?php 
+session_start();
+
+if(isset($_POST['user']) && isset($_POST['pwd'])){
+    $user = $_POST['user'];
+    $pwd = $_POST['pwd'];
+}
+
+class user{
+  private $usuario = "tiferet";
+  private $contraseña = "123";
+
+  function validar($user, $pwd){
+   if($user == $this->usuario && $pwd == $this->contraseña){
+      $_SESSION['user']="Administrador";
+      header('location: ../admin.php');
+    }else{
+      echo "Error de Usuario o contraseña, intente nuevamente";
+    }
+
+  }
+  }
+$login = new user;
+if($_POST){
+  $login->validar($_POST['user'],$_POST['pwd']);
+}
+?>

@@ -9,14 +9,13 @@ class BD extends CNX {
   private $contenido;
   private $icono;
   private $tcr;
-  private $pb;
   private $nimg;
   private $fecha;
   private $autor;
 
 //Metods
   function ListadoArticulos($tipo){
-    $conn= $this->cnx();
+    $conn = $this->cnx();
     try{
       $this->consulta = $conn->prepare("select titulo, idArticulos from articulos where tipo = :tipo");
       $this->consulta->execute(array(':tipo'=>$tipo));
@@ -26,8 +25,6 @@ class BD extends CNX {
         echo '<li style="padding: 5px 0 5px 0;"><a href="'.(int)$value['idArticulos'].'">'.$value['titulo'].'</a></li>';
       }
       echo '</ul>';
-      //$this->pb = $value['idArticulos'];
-      //  echo $this->gPb();
       } catch (Exception $e) {
       echo "Error al realizar la consulta";   
     }
@@ -51,8 +48,8 @@ class BD extends CNX {
     $this->respuesta=NULL;
     $conn = $this->cnx();
     try{
-      $this->consulta = $conn->prepare("select contenido, titulo, subtitulo, autor, fecha, tcr, nimg from articulos where titulo = :item");
-      $this->consulta->execute(array(':item'=>$_COOKIE['item']));
+      $this->consulta = $conn->prepare("SELECT contenido, titulo, subtitulo, autor, fecha, tcr, nimg FROM articulos WHERE titulo = :id");
+      $this->consulta->execute(array(':id'=>$_COOKIE['item']));
       $this->respuesta = $this->consulta->fetchAll(PDO::FETCH_ASSOC); 
       if ($this->respuesta){
         foreach($this->respuesta as $valor){
@@ -226,13 +223,9 @@ class BD extends CNX {
    echo $this->tcr;
   }
   
-  function gPb(){
-    return $this->pb;
-  }
-
   function gImg(){
     if($this->nimg<>""){
-      echo "<img src='../../upload/Imagenes/$this->nimg' style='width:100%; padding:0;'>";
+      echo "<img src='../../upload/Imagenes/$this->nimg' class='img-thumbnail' style='width:100%; padding:0; margin-bottom:10px;'>";
     }else{
       echo "";
     }

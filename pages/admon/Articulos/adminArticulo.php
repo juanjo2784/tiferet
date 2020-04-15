@@ -1,6 +1,6 @@
 <?php 
-include_once("ApiAdmin.php");
-$article = new Admin;
+include_once("Model/mArticulo.php");
+$article = new Articulo;
 
 if (!isset($_SESSION['tipo']) && (!isset($_POST['tipo']))){
   $_SESSION['tipo']=1;
@@ -81,7 +81,7 @@ if(isset($_SESSION['result'])){
   }
 }
 ?>
-<form action="upArticulo.php" method="post" enctype="multipart/form-data">
+<form action="Articulos/upArticulo.php" method="post" enctype="multipart/form-data">
     <fieldset>
     <legend class="text-center">Actualizar Articulo de Texto</legend>
     </fieldset>
@@ -133,4 +133,5 @@ if(isset($_SESSION['result'])){
   </form>
 
 
+</div>
 </div>

@@ -1,28 +1,8 @@
 <?php
-
-class Evento {
-  private static $user;
-  private static $password;
-  private static $host;
-  private $conn;
+include_once("../../config/tiferet/conexion.php");
+class Evento extends CNX {
   private $consulta;
   private $respuesta = [];
-
-  public function __construct() {
-    self::$user = 'admin';
-    self::$password = 3125480765;
-    self::$host = "mysql:host=localhost;dbname=bdtiferet";
-  }
-
-//Metods
-  function cnx(){
-    try {
-      $this->conn = new PDO(self::$host,self::$user,self::$password);
-      $this->conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-    } catch (Exception $e) {
-      echo "Error al conectar con la App";       
-    }
-  }
 
   function addFile($ruta, $tmp_name){
     try{
