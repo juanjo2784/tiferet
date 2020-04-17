@@ -58,30 +58,26 @@ function itipo($a){
   <div class="form-group row">
   <input type="hidden" name="tipo" value="<?php echo $_SESSION['tipo']?>">
   <input type="hidden" name="contenido" value="<?php echo $_SESSION['contenido']?>">
-    <input type="text" name="name" class="form-control col-9" value="<?php echo $article->gNombre()?>" placeholder="Nombre">
+    <input type="text" name="name" class="form-control col-6" value="<?php echo $article->gNombre()?>" placeholder="Nombre">
   </div>
 
   <?php if ($_SESSION['formulario'] != 2) {?>
     <div class="form-group row">
-    <label for="titulo" class="col-3 col-form-label">Titulo</label>
-    <input type="text" name="titulo" class="col-9 form-control" value="<?php $article->gTitulo()?>">
+    <input type="text" name="titulo" class="col-6 form-control" value="<?php $article->gTitulo()?>"  placeholder="Titulo">
     </div>
 
     <div class="form-group row">
-    <label for="descripcion" class="col-3 col-form-label">Descripción</label>
-    <input type="text" name="descripcion" class="col-9 form-control" value="<?php $article->gDescripcion()?>">
+    <input type="text" name="descripcion" class="col-6 form-control" value="<?php $article->gDescripcion()?>"  placeholder="Descripción">
     </div>
   <?php } 
   if ($_SESSION['formulario'] == 3) { ?>
     <div class="form-group row">
-    <label for="direccion" class="col-3 col-form-label">Dirección</label>
-    <input type="text" name="direccion" class="col-9 form-control" value="<?php $article->gDir()?>">
+    <input type="text" name="direccion" class="col-6 form-control" value="<?php $article->gDir()?>"  placeholder="Dirección">
     </div>
   <?php } ?>
 
   <div class="form-group row">
-    <label for="archivo" class="col-3 col-form-label">Seleccione el archivo</label>
-    <input type="file" class="col-9 form-control" name="archivo" />
+    <input type="file" class="col-6 form-control" name="archivo" />
   </div>
 
   <input type="hidden"  name="id"  value="<?php $article->gIdfile()?>">
@@ -91,7 +87,7 @@ function itipo($a){
  switch($article->gTipo()){
    case 1:
     $src="/../../upload/Imagenes/".$article->gNombre();
-      echo "<center><img src=".$src." height='240'></center>";
+      echo "<center><img src=".$src." max-height='240'></center>";
    break;
    case 3:
     $src="/../../upload/Videos/".$article->gNombre();
