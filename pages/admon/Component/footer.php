@@ -2,22 +2,22 @@
 <div class="row">
 
   <div class="col-xs-12 col-sm-3">
-    <h4>Administrador de Contenidos Develope by Appsher</h4>
+  <?php 
+        if(!empty($_SESSION['user'])){
+           echo '<h4>'.$_SESSION['user'].'</h4>';
+        }
+        ?>
   </div>
 
   <div class="col-xs-12 col-sm-4" >
     <div class="container">
-
+      <h5>Administrador de Contenidos Develope by Appsher</h5>
     </div>
   </div>
 
   <div class="col-xs-12 col-sm-4">
     <div class="container">
-        <?php 
-        if(!empty($_SESSION['user'])){
-           echo '<h3>'.$_SESSION['user'].'</h3>';
-        }
-        ?>
+        <p>2020-v3</p>
      </div>
   </div>
 

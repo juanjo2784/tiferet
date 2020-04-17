@@ -4,7 +4,7 @@
   $("#myDiv").css("display", "block");
   var calendar = new FullCalendar.Calendar(calendarEl, {
     plugins: [ 'dayGrid', 'interaction' ],
-    events: "http://localhost/inc/admon/eventos.php",
+    events: "http://localhost/pages/admon/Eventos/eventos.php",
     
     dateClick:function(info){
       $('#nevento').modal();

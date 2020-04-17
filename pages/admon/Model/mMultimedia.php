@@ -1,5 +1,5 @@
 <?php 
-include_once("conexion.php");
+include_once("../../config/tiferet/conexion.php");
 class Multimedia extends CNX {
   private $consulta;
   private $respuesta = [];
@@ -14,6 +14,55 @@ class Multimedia extends CNX {
   public $id;
   public $ext;
   public $src;
+
+  function addFile($ruta, $tmp_name){
+    try{
+     move_uploaded_file($tmp_name,$ruta);
+     $_SESSION['msg']=6;
+    }catch(Exception $e){
+     $_SESSION['msg']=7;
+    }
+  }
+
+  function Listado($tipo, $categoria){
+   $conn = $this->cnx();
+   try{
+     $this->consulta = $conn->prepare("SELECT nombre, idarchivo FROM multimedia WHERE tipo = $tipo AND categoria = $categoria");
+     $this->consulta->execute();
+     $this->respuesta = $this->consulta->fetchAll();
+     echo '<ul class="tlink">';
+     foreach ($this->respuesta as $value){
+       echo '<li><a href="?c=2&a='.(int)$value['idarchivo'].'&n='.$value['nombre'].'&t='.$tipo.'">'.$value['nombre'].'</a></li>';
+     }
+     echo '</ul>';
+     $src="";
+   } catch (Exception $e) {
+    echo "error";  
+   }
+   $this->dbClose();
+ }
+ 
+ function DelMultimedia($p){
+   $conn = $this->cnx();
+   try{
+     $this->consulta = $conn->prepare("DELETE FROM multimedia WHERE (idarchivo=$p)");
+     $this->consulta->execute();
+   } catch (Exception $e){
+     echo "Error al eliminar";
+   }
+ $this->dbClose();
+ }
+ 
+ function UpMultimedia($categoria, $tipo, $nombre, $titulo, $descripcion, $dir, $idarchivo){
+   $conn = $this->cnx();
+   try{
+     $this->consulta = $conn->prepare("UPDATE articulos set categoria = :categoria, descripcion = :descripcion, dir = :dir, nombre = :nombre, tipo = :tipo, titulo = :titulo, dir = :dir WHERE (idarchivo= :idarchivo)");
+     $this->consulta->execute(array(":categoria"=>$categoria, ":tipo"=>$tipo, ":nombre"=>$nombre, ":titulo"=>$titulo, ":descripcion"=>$descripcion, ":dir"=>$dir, ":idarchivo"=>$idarchivo));
+   } catch (Exception $e){
+     echo "Error al actualizar";
+   }
+ $this->dbClose();
+ }
 
   function dbClose(){
     $this->conn = NULL;
@@ -61,15 +110,6 @@ class Multimedia extends CNX {
   
  }
 
- function addFile($ruta, $tmp_name){
-   try{
-    move_uploaded_file($tmp_name,$ruta);
-    $_SESSION['msg']=6;
-   }catch(Exception $e){
-    $_SESSION['msg']=7;
-   }
- }
-
  function Mfile($nfile, $titulo, $descripcion, $categoria, $tipo, $direccion, $ntf){
   switch($tipo){
     case 1:
@@ -84,15 +124,15 @@ class Multimedia extends CNX {
   }
   
   move_uploaded_file($ntf,$ruta);
-  $this->cnx();
-  $this->consulta = $this->conn->prepare("INSERT INTO multimedia (nombre, titulo, descripcion, categoria, tipo, dir) values(:nombre,:titulo,:descripcion,:categoria,:tipo, :direccion)");
+  $conn = $this->cnx();
+  $this->consulta = $conn->prepare("INSERT INTO multimedia (nombre, titulo, descripcion, categoria, tipo, dir) values(:nombre,:titulo,:descripcion,:categoria,:tipo, :direccion)");
   $this->consulta->execute(array(":nombre"=>$nfile, ":titulo"=>$titulo, ":descripcion"=>$descripcion, ":categoria"=>$categoria, ":tipo"=>$tipo, ":direccion"=>$direccion));
  }
 
  function BMultimedia($p){
-  $this->cnx();
+  $conn = $this->cnx();
     try{
-      $this->consulta = $this->conn->prepare("SELECT * FROM multimedia WHERE idarchivo = $p");
+      $this->consulta = $conn->prepare("SELECT * FROM multimedia WHERE idarchivo = $p");
       $this->consulta->execute();
       $this->respuesta = $this->consulta->fetchAll(PDO::FETCH_ASSOC);
         foreach($this->respuesta as $valor){
@@ -108,24 +148,6 @@ class Multimedia extends CNX {
     } catch (Exception $e){
       echo "No hay resultados para mostrar";
     }
-  $this->dbClose();
-}
-
-function Listado($tipo, $categoria){
-  $this->cnx();
-  try{
-    $this->consulta = $this->conn->prepare("SELECT nombre, idarchivo FROM multimedia WHERE tipo = $tipo AND categoria = $categoria");
-    $this->consulta->execute();
-    $this->respuesta = $this->consulta->fetchAll();
-    echo '<ul class="tlink">';
-    foreach ($this->respuesta as $value){
-      echo '<li><a href="?c=2&a='.(int)$value['idarchivo'].'&n='.$value['nombre'].'&t='.$tipo.'">'.$value['nombre'].'</a></li>';
-    }
-    echo '</ul>';
-    $src="";
-  } catch (Exception $e) {
-    $_SESSION['result']=3;  
-  }
   $this->dbClose();
 }
 
@@ -199,29 +221,6 @@ function gNfile(){
 
 function gTipo(){
   return $this->tipo;
-}
-
-
-function DelMultimedia($p){
-  $this->cnx();
-  try{
-    $this->consulta = $this->conn->prepare("DELETE FROM multimedia WHERE (idarchivo=$p)");
-    $this->consulta->execute();
-  } catch (Exception $e){
-    echo "Error al eliminar";
-  }
-$this->dbClose();
-}
-
-function UpMultimedia($categoria, $tipo, $nombre, $titulo, $descripcion, $dir, $idarchivo){
-  $this->cnx();
-  try{
-    $this->consulta = $this->conn->prepare("UPDATE articulos set categoria = :categoria, descripcion = :descripcion, dir = :dir, nombre = :nombre, tipo = :tipo, titulo = :titulo, dir = :dir WHERE (idarchivo= :idarchivo)");
-    $this->consulta->execute(array(":categoria"=>$categoria, ":tipo"=>$tipo, ":nombre"=>$nombre, ":titulo"=>$titulo, ":descripcion"=>$descripcion, ":dir"=>$dir, ":idarchivo"=>$idarchivo));
-  } catch (Exception $e){
-    echo "Error al actualizar";
-  }
-$this->dbClose();
 }
 
 }

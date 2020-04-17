@@ -66,20 +66,8 @@ function flistado($a){
 </div>
 
 <div class="col-9">
-<?php 
-if(isset($_SESSION['result'])){
-  if(($_SESSION['result'])==1){
-    echo "<div class='alert alert-success alert-dismissible'>
-    <button type='button' class='close' data-dismiss='alert'>&times;</button>
-    <strong>Proceso finalizado sin errores!</strong></div>";
-    $_SESSION['result']=null;
-  }else{
-    echo "<div class='alert danger-success alert-dismissible'>
-    <button type='button' class='close' data-dismiss='alert'>&times;</button>
-    <strong>Error!</strong>No se pudo terminar la petición. tipo de Error: 00".$_SESSION['result']."</div>";
-    $_SESSION['result']=null;
-  }
-}
+<?php
+include_once('Config/msg.php');
 ?>
 <form action="Articulos/upArticulo.php" method="post" enctype="multipart/form-data">
     <fieldset>

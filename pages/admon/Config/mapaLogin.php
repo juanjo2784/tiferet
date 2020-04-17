@@ -5,6 +5,7 @@ if($_SESSION['user']){
   }else{
     $a = ($_GET['a']);
     switch(true){
+      //Articulos
       case ($a=="articulos"):
         $contenido = "Articulos/AddArticulo.php";
       break;
@@ -14,20 +15,21 @@ if($_SESSION['user']){
       case ($a=="delArticulo"):
         $contenido = "Articulos/delArticulo.php";
       break;
+      //Multimedia
       case ($a=="multimedia"):
-        $contenido = "Multimedia/Lev/addMultimedia.php";
+        $contenido = "Multimedia/addMultimedia.php";
       break;
       case ($a=="adminmultimedia"):
-        $contenido = "Multimedia/Lev/adminMultimedia.php";
+        $contenido = "Multimedia/adminMultimedia.php";
       break;
       case ($a=="delMultimedia"):
-        $contenido = "Multimedia/Lev/delMultimedia.php";
+        $contenido = "Multimedia/delMultimedia.php";
       break;
       case ($a=="video"):
-        $contenido = "Youtube/Lev/addVideo.php";
+        $contenido = "Youtube/addVideo.php";
       break;
       case ($a=="adminvideo"):
-        $contenido = "Youtube/Lev/adminvideo.php";
+        $contenido = "Youtube/adminvideo.php";
       break;
       case ($a=="eventos"):
         $contenido = "Eventos/View/cronograma.php";
@@ -38,10 +40,10 @@ if($_SESSION['user']){
             $contenido = "Articulos/adminArticulo.php";
           break;
           case 2:
-            $contenido = "Multimedia/Lev/adminMultimedia.php";
+            $contenido = "Multimedia/adminMultimedia.php";
           break;
           case 3:
-            $contenido = "Youtube/Lev/adminvideo.php";
+            $contenido = "Youtube/adminvideo.php";
           break;
           }
       break;

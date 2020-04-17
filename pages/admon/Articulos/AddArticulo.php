@@ -19,15 +19,17 @@ if($_POST){
 
   try{
     $registro->AddArticulo($titulo, $subtitulo, $autor, $tipo, $contenido, $tcr, $fecha,$nimg);
-    $_SESSION['result']=1;
-    header("location: indexAdmin.php?a=UpdateArticulo");
+    header("location: /pages/admon/admin.php?a=articulos&msg=3");
   } catch (Exception $e){
-      $_SESSION['result']=0;
+    header("location: /pages/admon/admin.php?a=articulos&msg=0");
   }
 }
 
 ?>
 <div class="container cartag">
+<?php
+include_once('Config/msg.php');
+?>
 <form action="" method="post" enctype="multipart/form-data">
 <fieldset><legend class="text-center">Agregar un Articulo de Texto</legend>
 <div class="form-group row">

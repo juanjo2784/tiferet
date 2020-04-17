@@ -1,6 +1,6 @@
 <?php
 //echo getcwd();
-include_once("conexion.php");
+include_once("../../config/tiferet/conexion.php");
 class Articulo extends CNX {
   private $consulta;
   private $respuesta = [];
@@ -66,11 +66,13 @@ class Articulo extends CNX {
 
   function UpdateArticulo($titulo,$subtitulo,$autor,$contenido,$tcr,$fecha,$p,$nimg){
     $conn = $this->cnx();
+    $_SESSION['msg']=3;
     try{
       $this->consulta = $conn->prepare("UPDATE articulos set titulo = :titulo, subtitulo = :subtitulo, autor = :autor, contenido = :contenido, tcr = :tcr, fecha = :fecha, nimg = :nimg WHERE (idArticulos= :id)");
       $this->consulta->execute(array(":titulo"=>$titulo, ":subtitulo"=>$subtitulo, ":autor"=>$autor, ":contenido"=>$contenido, ":tcr"=>$tcr, ":fecha"=>$fecha, "id"=>$p, ":nimg"=>$nimg));
     } catch (Exception $e){
       echo "Error al actualizar";
+      $_SESSION['msg']=5;
     }
   $this->dbClose();
   }

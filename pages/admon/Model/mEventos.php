@@ -1,5 +1,5 @@
 <?php
-include_once("../../config/tiferet/conexion.php");
+include_once("../../../config/tiferet/conexion.php");
 class Evento extends CNX {
   private $consulta;
   private $respuesta = [];
@@ -14,9 +14,9 @@ class Evento extends CNX {
   }
 
   function Eventos(){
-    $this->cnx();
+    $conn = $this->cnx();
     try{
-      $this->consulta = $this->conn->prepare("SELECT title, inicio as start, textColor, backgroundColor, dir, id, img, audio FROM eventos");
+      $this->consulta = $conn->prepare("SELECT title, inicio as start, textColor, backgroundColor, dir, id, img, audio FROM eventos");
       $this->consulta->execute();
       $this->respuesta = $this->consulta->fetchAll(PDO::FETCH_ASSOC);
         echo json_encode($this->respuesta);
@@ -27,13 +27,13 @@ class Evento extends CNX {
   }
 
   function dbClose(){
-    $this->conn = NULL;
+    $conn = NULL;
     $this->consulta = NULL;
   }
 
   function AddEvento($title, $inicio, $color, $fondo, $dir, $img){
-    $this->cnx();
-      $this->consulta = $this->conn->prepare("INSERT INTO eventos (title, inicio, backgroundColor, textColor, dir, img) VALUES (:title, :inicio, :backgroundColor, :textColor, :dir, :img)");
+    $conn = $this->cnx();
+      $this->consulta = $conn->prepare("INSERT INTO eventos (title, inicio, backgroundColor, textColor, dir, img) VALUES (:title, :inicio, :backgroundColor, :textColor, :dir, :img)");
       $this->consulta->execute(array(":title"=>$title, ":inicio" => $inicio, ":backgroundColor"=>$fondo, ":textColor"=>$color, ":dir"=>$dir,":img"=> $img));
       $this->dbClose();
   }
@@ -45,9 +45,9 @@ class Evento extends CNX {
     $color='\''.$color.'\'';
     $fondo='\''.$fondo.'\'';
     echo "imagen ".$img." auido: ".$audio;
-    $this->cnx();
+    $conn = $this->cnx();
     try{
-      $this->consulta = $this->conn->prepare("UPDATE eventos set title=:title, inicio=$inicio, textColor=$color, backgroundColor=$fondo, dir=:dir, img=$img, audio=$audio  WHERE (id=$id)");
+      $this->consulta = $conn->prepare("UPDATE eventos set title=:title, inicio=$inicio, textColor=$color, backgroundColor=$fondo, dir=:dir, img=$img, audio=$audio  WHERE (id=$id)");
       $this->consulta->execute(array(":title"=>$title, ":dir"=>$dir));
     }catch(Exception $e){
       echo "Error en la consulta: ".$e;
@@ -57,9 +57,9 @@ class Evento extends CNX {
   }
 
   function delEvento($id){
-    $this->cnx();
+    $conn = $this->cnx();
     try{
-      $this->consulta = $this->conn->prepare("DELETE FROM eventos WHERE (id=$id)");
+      $this->consulta = $conn->prepare("DELETE FROM eventos WHERE (id=$id)");
       $this->consulta->execute();
     } catch (Exception $e){
       echo "Error al eliminar";
