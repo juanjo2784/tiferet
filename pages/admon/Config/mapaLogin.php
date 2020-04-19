@@ -32,6 +32,7 @@ if($_SESSION['user']){
       case ($a=="adminvideo"):
         $contenido = "Youtube/adminvideo.php";
       break;
+      //Eventos
       case ($a=="eventos"):
         $contenido = "Eventos/View/cronograma.php";
       break;

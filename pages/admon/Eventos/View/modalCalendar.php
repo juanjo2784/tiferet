@@ -18,7 +18,7 @@
         
         <!-- Modal body -->
         <div class="modal-body">
-          <form action="crdEvento.php" method="post" enctype="multipart/form-data">
+          <form action="Eventos/crdEvento.php" method="post" enctype="multipart/form-data">
 
           <div class="form-group row">
               <label for="title" class="col-4 col-form-label">Nombre</label><input type="text" class="form-control col-8 float-left" id="title" name="title"  placeholder="Nombre del Evento" value="Prueba">
@@ -68,7 +68,7 @@
         
         <!-- Modal body -->
         <div class="modal-body">
-          <form action="crdEvento.php" method="post" enctype="multipart/form-data">
+          <form action="Eventos/crdEvento.php" method="post" enctype="multipart/form-data">
           <div class="container p-2 d-flex aling-content-center"><img src="" id="img3" class="img-thumbnail"></div>
           <div class="form-group row">
               <label for="title" class="col-4 col-form-label">Nombre</label><input type="text" class="form-control col-8 float-left" id="title2" name="title" >

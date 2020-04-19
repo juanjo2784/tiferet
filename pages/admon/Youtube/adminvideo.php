@@ -54,9 +54,10 @@ if(isset($_SESSION['msg'])){
   }
 }
 ?>
+<h2 class="p-3">Administrar Videos de YouTube</h2>
 <div class="d-flex">
-  <div class="col-9">
-  <h2>Administrar Videos de YouTube</h2>
+
+  <div class="col-6">
     <form method="POST" action="Youtube/crudVideo.php" enctype="multipart/form-data">
       <div class="form-group row">
         <label for="titulo" class="col-3 col-form-label">Titulo del video</label>
@@ -86,19 +87,25 @@ if(isset($_SESSION['msg'])){
       </form>
   </div>
 
-<div class="col-3">
-<div class="container">
-<form action="" method="post">
-<div class="form-group row">
-    <select name="ltipo" id="ltipo" class="col-12 form-control" >
-      <option value=1>Parasha</option>
-      <option value=2>Segula</option>
-      <option value=3>Articulo</option>
-      <option value=4>Receta</option>
-      <option value=5>Tziniut</option>
-    </select>
-    <button type="submit" class="btn btn-primary btn-lg col-12">Listar</button>
+  <div class="col-4">
+  <iframe width="420" height="315"
+    src=<?php $video->gVurl() ?>>
+    </iframe>
   </div>
+
+<div class="col-2">
+  <div class="container">
+  <form action="" method="post">
+  <div class="form-group row">
+      <select name="ltipo" id="ltipo" class="col-12 form-control" >
+        <option value=1>Parasha</option>
+        <option value=2>Segula</option>
+        <option value=3>Articulo</option>
+        <option value=4>Receta</option>
+        <option value=5>Tziniut</option>
+      </select>
+      <button type="submit" class="btn btn-primary btn-lg col-12">Listar</button>
+    </div>
 </div>
 
 </form>

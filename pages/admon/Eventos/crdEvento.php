@@ -1,6 +1,6 @@
 <?php 
   session_start();
-  require_once('ApiEventos.php');
+  require_once('../Model/mEventos.php');
   $evento = new Evento();
 if($_POST){
   $id = (isset($_POST['idevento']))?$_POST['idevento']:0;
@@ -29,7 +29,7 @@ if($_POST){
       }
       $evento->addEvento($title, $inicio, $color, $fondo, $dir, $img);
       $_SESSION['msg']=2;
-      header("location: indexAdmin.php?a=eventos");
+      header("location: /pages/admon/admin.php?a=eventos");
     break;
     case 3:
 //agregamos el archivo de audio y eliminamos el existente cuando exista
@@ -57,12 +57,12 @@ if($_POST){
 //ejecutamos la funccion de agregar evento
     $evento->upEvento($id, $title, $inicio, $color, $fondo, $dir, $img, $audio);
     $_SESSION['msg']=3;
-    header("location: indexAdmin.php?a=eventos");
+    header("location: /pages/admon/admin.php?a=eventos");
     break;
   }
   }catch(Exception $e){
       $_SESSION['msg']=0;
-      header("location: indexAdmin.php?a=eventos");
+      header("location: /pages/admon/admin.php?a=eventos");
   }
 }
 ?>

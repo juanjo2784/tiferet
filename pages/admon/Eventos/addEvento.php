@@ -1,5 +1,5 @@
 <?php 
-  include_once('Articulos/Model/mArticulo.php');
+  include_once('Model/mEventos.php');
     $evento = new Evento(); 
 
   if($_POST){

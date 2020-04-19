@@ -1,5 +1,5 @@
 <?php
-include_once("../../../config/tiferet/conexion.php");
+include_once("conexion.php");
 class Evento extends CNX {
   private $consulta;
   private $respuesta = [];

@@ -1,6 +1,6 @@
 <div class="container cartag">
 <h2>Agregar Video de YouTube</h2>
-<form method="POST" action="crudVideo.php" enctype="multipart/form-data">
+<form method="POST" action="Youtube/crudVideo.php" enctype="multipart/form-data">
 
   <div class="form-group row">
     <label for="titulo" class="col-3 col-form-label">Titulo del video</label>
