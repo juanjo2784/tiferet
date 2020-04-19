@@ -25,6 +25,7 @@ if($_SESSION['user']){
       case ($a=="delMultimedia"):
         $contenido = "Multimedia/delMultimedia.php";
       break;
+      //video
       case ($a=="video"):
         $contenido = "Youtube/addVideo.php";
       break;

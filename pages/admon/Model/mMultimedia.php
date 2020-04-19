@@ -1,5 +1,5 @@
 <?php 
-include_once("../../config/tiferet/conexion.php");
+include_once("conexion.php");
 class Multimedia extends CNX {
   private $consulta;
   private $respuesta = [];
@@ -14,6 +14,28 @@ class Multimedia extends CNX {
   public $id;
   public $ext;
   public $src;
+  
+  function BMultimedia($p){
+  $conn = $this->cnx();
+    try{
+      $this->consulta = $conn->prepare("SELECT * FROM multimedia WHERE idarchivo = $p");
+      $this->consulta->execute();
+      $this->respuesta = $this->consulta->fetchAll(PDO::FETCH_ASSOC);
+        foreach($this->respuesta as $valor){
+          $this->titulo = $valor['titulo'];
+          $this->nombre = $valor['nombre'];
+          $this->categoria = $valor['categoria'];
+          $this->dir = $valor['dir'];
+          $this->descripcion = $valor['descripcion'];
+          $this->idfile = $valor['idarchivo'];
+          $this->nfile = $valor['nombre'];
+          $this->tipo = $valor['tipo'];
+        } 
+    } catch (Exception $e){
+      echo "No hay resultados para mostrar";
+    }
+  $this->dbClose();
+}
 
   function addFile($ruta, $tmp_name){
     try{
@@ -23,6 +45,25 @@ class Multimedia extends CNX {
      $_SESSION['msg']=7;
     }
   }
+
+  function Mfile($nfile, $titulo, $descripcion, $categoria, $tipo, $direccion, $ntf){
+    switch($tipo){
+      case 1:
+        $ruta = '../../upload/Imagenes/'.$nfile;
+      break;
+      case 2:
+        $ruta = '../../upload/Audio/'.$nfile;
+      break;
+      case 3:
+        $ruta = '../../upload/Video/'.$nfile;
+      break;
+    }
+    
+    move_uploaded_file($ntf,$ruta);
+    $conn = $this->cnx();
+    $this->consulta = $conn->prepare("INSERT INTO multimedia (nombre, titulo, descripcion, categoria, tipo, dir) values(:nombre,:titulo,:descripcion,:categoria,:tipo, :direccion)");
+    $this->consulta->execute(array(":nombre"=>$nfile, ":titulo"=>$titulo, ":descripcion"=>$descripcion, ":categoria"=>$categoria, ":tipo"=>$tipo, ":direccion"=>$direccion));
+   }
 
   function Listado($tipo, $categoria){
    $conn = $this->cnx();
@@ -54,18 +95,18 @@ class Multimedia extends CNX {
  }
  
  function UpMultimedia($categoria, $tipo, $nombre, $titulo, $descripcion, $dir, $idarchivo){
-   $conn = $this->cnx();
-   try{
-     $this->consulta = $conn->prepare("UPDATE articulos set categoria = :categoria, descripcion = :descripcion, dir = :dir, nombre = :nombre, tipo = :tipo, titulo = :titulo, dir = :dir WHERE (idarchivo= :idarchivo)");
-     $this->consulta->execute(array(":categoria"=>$categoria, ":tipo"=>$tipo, ":nombre"=>$nombre, ":titulo"=>$titulo, ":descripcion"=>$descripcion, ":dir"=>$dir, ":idarchivo"=>$idarchivo));
-   } catch (Exception $e){
-     echo "Error al actualizar";
-   }
- $this->dbClose();
+  $conn = $this->cnx();
+  try{
+    $this->consulta = $conn->prepare("UPDATE multimedia set categoria = :categoria, descripcion = :descripcion, dir = :dir, nombre = :nombre, tipo = :tipo, titulo = :titulo, dir = :dir WHERE (idarchivo= :idarchivo)");
+    $this->consulta->execute(array(":categoria"=>$categoria, ":tipo"=>$tipo, ":nombre"=>$nombre, ":titulo"=>$titulo, ":descripcion"=>$descripcion, ":dir"=>$dir, ":idarchivo"=>$idarchivo));
+  } catch (Exception $e){
+    echo "Error al actualizar";
+  }
+  $this->dbClose();
  }
 
   function dbClose(){
-    $this->conn = NULL;
+    $conn = NULL;
     $this->consulta = NULL;
   }
 
@@ -94,61 +135,37 @@ class Multimedia extends CNX {
  function gSrc($a){
     switch($article->gTipo()){
       case 1:
-        $this->src="/../../upload/Imagenes/".$article->gNombre();
+        $this->src="/../../upload/Imagenes/".$this->gNombre();
          echo "<center><img src=".$this->src."></center>";
       break;
       case 3:
-        $this->src="/../../upload/Videos/".$article->gNombre();
+        $this->src="/../../upload/Videos/".$this->gNombre();
        echo "<center><video src=".$this->src." width='640' height='480' controls preload='auto'>Tu navegador no soporta MP4.</video></center>";
       break;
       
       case 2:
-        $this->src="/../../upload/Audio/".$article->gNombre();
+        $this->src="/../../upload/Audio/".$this->gNombre();
        echo "<center><audio src=".$this->src."  preload='auto' controls>Tu navegador no Soporta MP3.</audio></center>";
       break;
     };
   
  }
 
- function Mfile($nfile, $titulo, $descripcion, $categoria, $tipo, $direccion, $ntf){
-  switch($tipo){
+function itipo($a){
+  switch ($a) {
     case 1:
-      $ruta = '../../upload/Imagenes/'.$nfile;
-    break;
+        $listado = "Lista de Imagenes";
+        break;
     case 2:
-      $ruta = '../../upload/Audio/'.$nfile;
-    break;
+        $listado = "Lista de Audios";
+        break;
     case 3:
-      $ruta = '../../upload/Video/'.$nfile;
-    break;
+        $listado = "Lista de Videos";
+        break;
+    default:
+    $listado = "Debe seleccionar un opción";
   }
-  
-  move_uploaded_file($ntf,$ruta);
-  $conn = $this->cnx();
-  $this->consulta = $conn->prepare("INSERT INTO multimedia (nombre, titulo, descripcion, categoria, tipo, dir) values(:nombre,:titulo,:descripcion,:categoria,:tipo, :direccion)");
-  $this->consulta->execute(array(":nombre"=>$nfile, ":titulo"=>$titulo, ":descripcion"=>$descripcion, ":categoria"=>$categoria, ":tipo"=>$tipo, ":direccion"=>$direccion));
- }
-
- function BMultimedia($p){
-  $conn = $this->cnx();
-    try{
-      $this->consulta = $conn->prepare("SELECT * FROM multimedia WHERE idarchivo = $p");
-      $this->consulta->execute();
-      $this->respuesta = $this->consulta->fetchAll(PDO::FETCH_ASSOC);
-        foreach($this->respuesta as $valor){
-          $this->titulo = $valor['titulo'];
-          $this->nombre = $valor['nombre'];
-          $this->categoria = $valor['categoria'];
-          $this->dir = $valor['dir'];
-          $this->descripcion = $valor['descripcion'];
-          $this->idfile = $valor['idarchivo'];
-          $this->nfile = $valor['nombre'];
-          $this->tipo = $valor['tipo'];
-        } 
-    } catch (Exception $e){
-      echo "No hay resultados para mostrar";
-    }
-  $this->dbClose();
+  echo $listado;
 }
 
 function txtTipo($tipo){
@@ -191,7 +208,8 @@ function txtContenido($categoria){
   }
  }
 
-function gTitulo(){
+
+ function gTitulo(){
   echo $this->titulo;
 }
 
@@ -220,7 +238,36 @@ function gNfile(){
 }
 
 function gTipo(){
-  return $this->tipo;
+  switch($this->tipo){
+    case 1:
+     $src="/../../upload/Imagenes/".$this->gNombre();
+       echo "<center><img src=".$src." max-height='240' class='p-3'></center>";
+    break;
+    case 3:
+     $src="/../../upload/Videos/".$this->gNombre();
+     echo "<center><video src=".$src." height='240' controls preload='auto' class='p-3'>Tu navegador no soporta MP4.</video></center>";
+    break;
+    
+    case 2:
+     $src="/../../upload/Audio/".$this->gNombre();
+     echo "<center><audio src=".$src." controls autoplay class='p-3'>Tu navegador no Soporta MP3.</audio></center>";
+    break;
+  };
+}
+
+function gRuta($tipo){
+  switch($tipo){
+    case 1:
+      $pruta="../../upload/Imagenes/";
+    break;
+    case 2:
+      $pruta="../../upload/Audio/";
+    break;
+    case 3:
+      $pruta="../../upload/Videos/";
+    break;
+  }
+  return $pruta;
 }
 
 }

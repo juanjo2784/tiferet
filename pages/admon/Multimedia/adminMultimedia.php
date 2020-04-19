@@ -9,116 +9,92 @@ if (isset($_GET['a'])) {
     $article->BMultimedia($_GET['a']);
 }
 
-function itipo($a){
-  switch ($a) {
-    case 1:
-        $listado = "Lista de Imagenes";
-        break;
-    case 2:
-        $listado = "Lista de Audios";
-        break;
-    case 3:
-        $listado = "Lista de Videos";
-        break;
-    default:
-    $listado = "Debe seleccionar un opción";
-  }
-  echo $listado;
+$article->itipo($a);
+
+if($_POST){
+  $_SESSION['tipo']=$_POST['tipo'];
+  $_SESSION['contenido'] = $_POST['contenido'];
+  $_SESSION['formulario'] = $_POST['formulario'];
+  header("location: /pages/admon/admin.php?a=adminmultimedia");
 }
 
 ?>
 
-<div class="row ficha">
+<div class="row" class="cartag">
+    <form method="POST" action="" class="container pt-2">
+    <h2>Actualizar <?php $article->txtTipo($_SESSION['tipo']); $article->txtContenido($_SESSION['contenido']) ?></h2>
+        <div class="form-group row">
+          <select name="formulario" id="formulario"  class="col-3 form-control float-right" onchange="Cambiar()">
+            <option value=0></option>
+            <option value=1>Articulo</option>
+            <option value=2>Galeria</option>
+            <option value=3>Lugar</option>
+          </select>
+          <select name="contenido" class="col-3 form-control float-right" id="contenido">
+            <option value=0></option>
+          </select>
+          <select name="tipo" class="col-3 form-control float-right" id="tipo">
+            <option value=0></option>
+          </select>
+          <button type="submit" class="col-3 btn btn btn-outline-success btn-sm">Generar Formulario</button>
+        </div>
+    </form>
+</div>
+<div class="row col-12">
+  <div class="col-4">
+      <form method="POST" action="Multimedia/upMultimedia.php" enctype="multipart/form-data" class="container">
+      <div class="form-group row">
+      <input type="hidden" name="tipo" value="<?php echo $_SESSION['tipo']?>">
+      <input type="hidden" name="contenido" value="<?php echo $_SESSION['contenido']?>">
+        <input type="text" name="name" class="form-control" value="<?php echo $article->gNombre()?>" placeholder="Nombre">
+      </div>
 
-<div class="col-9">
-  <?php
+      <?php if ($_SESSION['formulario'] != 2) {?>
+        <div class="form-group row">
+        <input type="text" name="titulo" class="form-control" value="<?php $article->gTitulo()?>"  placeholder="Titulo">
+        </div>
+
+        <div class="form-group row">
+        <input type="text" name="descripcion" class="form-control" value="<?php $article->gDescripcion()?>"  placeholder="Descripción">
+        </div>
+      <?php } 
+      if ($_SESSION['formulario'] == 3) { ?>
+        <div class="form-group row">
+        <input type="text" name="direccion" class="form-control" value="<?php $article->gDir()?>"  placeholder="Dirección">
+        </div>
+      <?php } ?>
+
+      <div class="form-group row">
+        <input type="file" class="form-control" name="archivo" />
+      </div>
+
+      <input type="hidden"  name="id"  value="<?php $article->gIdfile()?>">
+      <!--Mostrar contenido multimedia-->
+    <div>
+
+    </div>
+      <div class="form-group row">
+        <div class="col-sm-12 d-flex justify-content-between">
+          <a href="?p=<?php $article->gIdfile();?>&a=delMultimedia"  class="lbnt btn btn-danger btn-lg">Eliminar</a>
+          <button type="submit" class="btn btn-primary btn-lg">Actualizar</button>
+        </div>
+      </div>
+    </form>
+  </div>
+
+  <!--imagen-->
+  <div class="col-4"><?php
   include_once('Config/msg.php');
-  ?>
-<form method="POST" action="vardatos.php" class="container">
-<h2>Actualizar <?php $article->txtTipo($_SESSION['tipo']); $article->txtContenido($_SESSION['contenido']) ?></h2>
+  $article->gTipo() ?></div>
 
-  <div class="form-group row">
-    <select name="formulario" id="formulario"  class="col-3 form-control float-right" onchange="Cambiar()">
-      <option value=0></option>
-      <option value=1>Articulo</option>
-      <option value=2>Galeria</option>
-      <option value=3>Lugar</option>
-    </select>
-    <select name="contenido" class="col-3 form-control float-right" id="contenido">
-      <option value=0></option>
-    </select>
-    <select name="tipo" class="col-3 form-control float-right" id="tipo">
-      <option value=0></option>
-    </select>
-    <button type="submit" class="col-3 btn btn btn-outline-success btn-sm">Generar Formulario</button>
-  </div>
-</form>
-  
-<form method="POST" action="upMultimedia.php" enctype="multipart/form-data" class="container">
-  <div class="form-group row">
-  <input type="hidden" name="tipo" value="<?php echo $_SESSION['tipo']?>">
-  <input type="hidden" name="contenido" value="<?php echo $_SESSION['contenido']?>">
-    <input type="text" name="name" class="form-control col-6" value="<?php echo $article->gNombre()?>" placeholder="Nombre">
-  </div>
-
-  <?php if ($_SESSION['formulario'] != 2) {?>
-    <div class="form-group row">
-    <input type="text" name="titulo" class="col-6 form-control" value="<?php $article->gTitulo()?>"  placeholder="Titulo">
-    </div>
-
-    <div class="form-group row">
-    <input type="text" name="descripcion" class="col-6 form-control" value="<?php $article->gDescripcion()?>"  placeholder="Descripción">
-    </div>
-  <?php } 
-  if ($_SESSION['formulario'] == 3) { ?>
-    <div class="form-group row">
-    <input type="text" name="direccion" class="col-6 form-control" value="<?php $article->gDir()?>"  placeholder="Dirección">
-    </div>
-  <?php } ?>
-
-  <div class="form-group row">
-    <input type="file" class="col-6 form-control" name="archivo" />
-  </div>
-
-  <input type="hidden"  name="id"  value="<?php $article->gIdfile()?>">
-  <!--Mostrar contenido multimedia-->
-<div>
- <?php 
- switch($article->gTipo()){
-   case 1:
-    $src="/../../upload/Imagenes/".$article->gNombre();
-      echo "<center><img src=".$src." max-height='240'></center>";
-   break;
-   case 3:
-    $src="/../../upload/Videos/".$article->gNombre();
-    echo "<center><video src=".$src." width='320' height='240' controls preload='auto'>Tu navegador no soporta MP4.</video></center>";
-   break;
-   
-   case 2:
-    $src="/../../upload/Audio/".$article->gNombre();
-    echo "<center><audio src=".$src." controls autoplay>Tu navegador no Soporta MP3.</audio></center>";
-   break;
- };
-
- ?>
-
-</div>
-  <div class="form-group row">
-    <div class="col-sm-12 d-flex justify-content-between">
-      <a href="?p=<?php $article->gIdfile();?>&a=delMultimedia"  class="lbnt btn btn-danger btn-lg">Eliminar</a>
-      <button type="submit" class="btn btn-primary btn-lg">Actualizar</button>
-    </div>
-  </div>
-</form>
-</div>
-
-<div class="col-3">
+<!--Listado de articulos-->
+  <div class="col-4">
   <div class="container">
-    <?php echo "<h4>".itipo($_SESSION['tipo'])." ".$article->txtContenido($_SESSION['contenido'])."</h4>"; $article->Listado($_SESSION['tipo'],$_SESSION['contenido']); ?>
+    <?php echo "<h4>".$article->itipo($_SESSION['tipo'])." ".$article->txtContenido($_SESSION['contenido'])."</h4>"; $article->Listado($_SESSION['tipo'],$_SESSION['contenido']); ?>
+  </div>
   </div>
 </div>
 
-</div>
 
 <script type="text/javascript">
   let opc1 = new Array("Parasha","Segula","Emuna y Bitajon","Receta","Tziniut")
@@ -144,7 +120,7 @@ function itipo($a){
           break;
         case 3:
           b=7
-          break;          
+          break;
       }
       document.getElementById('contenido').length = cant //cantidad de elementos que se agregaran al selection
       for(i=0; i<cant; i++){

@@ -10,6 +10,7 @@ $tcr = $_POST['tcr'];
 $fecha = $_POST['fecha'];
 $id = $_POST['id'];
 $nimg =(!empty($_POST['filename']))?$_POST['filename']:$_FILES['fname']['name'];
+
 try {
   if(isset($_FILES)){
     move_uploaded_file($_FILES['fname']['tmp_name'],"../../../upload/Imagenes/".$_FILES['fname']['name']);
@@ -22,6 +23,4 @@ try {
 } catch (\Throwable $th) {
   header("location: /pages/admon/admin.php?a=UpdateArticulo&msg=0");
 }
-
-
 ?>

@@ -113,8 +113,8 @@ if($_FILES){
 
   <div class="form-group row">
     <div class="col-sm-12 d-flex justify-content-between">
-      <a href="?a=adminmultimedia"  class="btn btn-success btn-lg">Listar Articulos</a>
-      <button type="submit" class="btn btn-primary btn-lg">Guardar Articulo</button>
+      <a href="?a=adminmultimedia"  class="btn btn-success btn-lg">Listar Medios</a>
+      <button type="submit" class="btn btn-primary btn-lg">Guardar Medio</button>
     </div>
   </div>
 

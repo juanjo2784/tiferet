@@ -1,6 +1,6 @@
 <?php
 //echo getcwd();
-include_once("../../config/tiferet/conexion.php");
+include_once("conexion.php");
 class Articulo extends CNX {
   private $consulta;
   private $respuesta = [];
@@ -88,6 +88,29 @@ class Articulo extends CNX {
   $this->dbClose();
   }
 
+  function flistado($a){
+    switch($a){
+      case 0:
+        $listado = "Debe seleccionar un opción";
+      break;
+      case 1:
+        $listado = "listado de Parashot";
+      break;
+      case 2:
+        $listado = "Segulot";
+      break;
+      case 3:
+        $listado = "Articulos";
+      break;
+      case 4:
+        $listado = "listado de Recetas";
+      break;
+      case 5:
+        $listado = "Articulos de Tziniut";
+      break;
+  }
+  return $listado;
+  }
 
   function Eventos(){
     $conn = $this->cnx();

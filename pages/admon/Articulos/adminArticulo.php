@@ -14,29 +14,6 @@ if(isset($_GET['a'])){
   $article->BuscarArticulo($_GET['a']);
 }
 
-function flistado($a){
-    switch($a){
-      case 0:
-        $listado = "Debe seleccionar un opción";
-      break;
-      case 1:
-        $listado = "listado de Parashot";
-      break;
-      case 2:
-        $listado = "Segulot";
-      break;
-      case 3:
-        $listado = "Articulos";
-      break;
-      case 4:
-        $listado = "listado de Recetas";
-      break;
-      case 5:
-        $listado = "Articulos de Tziniut";
-      break;
-    echo $a;
-  }
-}
 ?> 
 
 <div class="row ficha">
@@ -58,7 +35,7 @@ function flistado($a){
       <button type="submit" class="btn btn-secondary btn-block">Cambiar Listado de Articulos</button>
     </div>
   </form>
-  <?php   echo "<h2>".flistado($_SESSION['tipo'])."</h2>";
+  <?php   echo "<h2>".$article->flistado($_SESSION['tipo'])."</h2>";
    $article->ListadoArticulos($_SESSION['tipo']);
   ?>
 </div>

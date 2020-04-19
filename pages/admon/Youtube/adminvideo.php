@@ -1,5 +1,5 @@
 <?php 
-include_once "apiVideo.php";
+include_once("Model/mVY.php");
 $video = new Video;
 
 if($_POST){
@@ -57,7 +57,7 @@ if(isset($_SESSION['msg'])){
 <div class="d-flex">
   <div class="col-9">
   <h2>Administrar Videos de YouTube</h2>
-    <form method="POST" action="crudVideo.php" enctype="multipart/form-data">
+    <form method="POST" action="Youtube/crudVideo.php" enctype="multipart/form-data">
       <div class="form-group row">
         <label for="titulo" class="col-3 col-form-label">Titulo del video</label>
         <input type="text" name="titulo" class="form-control col-9" value="<?php $video->gTitulo(); ?>">

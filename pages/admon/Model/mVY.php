@@ -15,9 +15,9 @@ class Video extends CNX {
   }
 
   function Listado($tipo){
-    $this->cnx();
+    $conn = $this->cnx();
     try{
-      $this->consulta = $this->conn->prepare("SELECT idvideo, titulo, vurl from youtube where tipo = $tipo");
+      $this->consulta = $conn->prepare("SELECT idvideo, titulo, vurl from youtube where tipo = $tipo");
       $this->consulta->execute();
       $this->respuesta = $this->consulta->fetchAll();
       echo '<ul>';
@@ -32,9 +32,9 @@ class Video extends CNX {
   }
 
   function Bvideo($id){
-    $this->cnx();
+    $conn = $this->cnx();
       try{
-        $this->consulta = $this->conn->prepare("SELECT * FROM youtube WHERE idvideo = $id");
+        $this->consulta = $conn->prepare("SELECT * FROM youtube WHERE idvideo = $id");
         $this->consulta->execute();
         $this->respuesta = $this->consulta->fetchAll(PDO::FETCH_ASSOC);
           foreach($this->respuesta as $valor){
@@ -50,10 +50,10 @@ class Video extends CNX {
   }
  
   public function AddVideo($titulo, $tipo, $url){
-    $this->cnx();
+    $conn = $this->cnx();
     $sql="INSERT INTO youtube (titulo, tipo, vurl) VALUES ($titulo, $tipo, $url)";
     echo $sql;
-      $consulta = $this->conn->prepare("INSERT INTO youtube (titulo, tipo, vurl) VALUES (:titulo, :tipo, :vurl)");
+      $consulta = $conn->prepare("INSERT INTO youtube (titulo, tipo, vurl) VALUES (:titulo, :tipo, :vurl)");
       $consulta->bindParam(':titulo',$titulo);
       $consulta->bindParam(':tipo',$tipo);
       $consulta->bindParam(':vurl',$url);
@@ -62,9 +62,9 @@ class Video extends CNX {
   }
 
   public function DelVideo($id){
-    $this->cnx();
+    $conn = $this->cnx();
     echo "asdfasdf";
-      $consulta = $this->conn->prepare("DELETE FROM youtube WHERE idvideo=:id");
+      $consulta = $conn->prepare("DELETE FROM youtube WHERE idvideo=:id");
       $consulta->bindParam(':id',$id, PDO::PARAM_INT);
       $consulta->execute();
     $this->dbClose();
@@ -73,8 +73,8 @@ class Video extends CNX {
   public function UpVideo($id, $titulo, $tipo, $url){
     $sql="UPDATE youtube SET tipo= $tipo, titulo=$titulo, vurl=$url WHERE (idvideo=$id)";
     echo $sql;
-    $this->cnx();
-    $consulta = $this->conn->prepare($sql);
+    $conn = $this->cnx();
+    $consulta = $conn->prepare($sql);
     /*$consulta->bindParam(':tipo',$tipo, PDO::PARAM_STR);
     $consulta->bindParam(':titulo',$titulo,  PDO::PARAM_STR);
     $consulta->bindParam(':vurl',$url,  PDO::PARAM_STR);*/

@@ -1,6 +1,6 @@
 <?php 
   session_start();
-  require_once('ApiVideo.php');
+  require_once('../Model/mVY.php');
   $video = new Video();
   $action = (isset($_GET['action']))?$_GET['action']:$_POST['action'];
 if($_POST){
@@ -13,17 +13,16 @@ if($_POST){
         var_dump($_POST);
         $video->AddVideo($titulo, $tipo, $url);
         $_SESSION['msg']=2;
-        header("location: indexAdmin.php?a=video");
+        header("location:/pages/admon/admin.php?a=video");
       break;
       case 3:
-       //var_dump($_POST);
       $id = (isset($_POST['id']))?$_POST['id']:0;
       $titulo = "'".$titulo."'";
       $url="'".$url."'";
       $tipo="'".$tipo."'";
       $video->UpVideo($id, $titulo, $tipo, $url);
       $_SESSION['msg']=3;
-      header("location: indexAdmin.php?a=adminvideo");
+      header("location:/pages/admon/admin.php?a=adminvideo");
       break;
     }
     }catch(Exception $e){
@@ -34,6 +33,6 @@ if($_POST){
     $id = (isset($_GET['id']))?$_GET['id']:0;
     $video->DelVideo($id);
     $_SESSION['msg']=3;
-    //header("location: indexAdmin.php?a=adminvideo");
+    header("location: /pages/admon/admin.php?a=adminvideo");
 }
 ?>
